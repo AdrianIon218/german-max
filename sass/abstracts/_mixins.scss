@@ -1,0 +1,91 @@
+@mixin mixin_animation($name, $duration, $time_function, $delay) {
+  animation: $name $duration $time_function $delay 1 normal both;
+  -webkit-animation: $name $duration $time_function $delay 1 normal both;
+  -moz-animation: $name $duration $time_function $delay 1 normal both;
+  -o-animation: $name $duration $time_function $delay 1 normal both;
+}
+
+@mixin mixin_animation-infinite($name, $duration, $time_function, $delay) {
+  animation: $name $duration $time_function $delay infinite normal both;
+  -webkit-animation: $name $duration $time_function $delay infinite normal both;
+  -moz-animation: $name $duration $time_function $delay infinite normal both;
+  -o-animation: $name $duration $time_function $delay infinite normal both;
+}
+
+@mixin floatclearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin textgradient($font-size, $color1, $color2) {
+  font-size: $font-size;
+  background-image: linear-gradient(to right, $color1, $color2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin textgradient--circle($font-size, $color1, $color2) {
+  font-size: $font-size;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: radial-gradient(circle, $color1 0%, $color2 100%);
+}
+
+@mixin btn-color($color-text, $color-background) {
+  background-color: $color-background;
+  font-weight: 700;
+  color: $color-text;
+
+  &::after {
+    background-color: $color-background;
+  }
+}
+
+/*
+0 - 600 px   phone
+900 - 1200 px   tablet portrait, tab-port
+900 - 1200 px   tablet landscape, tab-land
+1200 - 1800 px   normal styles
+> 1800 px   big desktop
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 1200px) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+@mixin touchScreenState($isTouchScreen) {
+  @if ($isTouchScreen == true) {
+    // coarse - minimum de acuratete , ca apasare cu degetul
+    @media only screen and (hover: none) and (pointer: coarse) {
+      @content;
+    }
+  } @else if($isTouchScreen == false) {
+    // fine - pentru mouse
+    @media only screen and (hover: hover) and (pointer: fine) {
+      @content;
+    }
+  }
+}

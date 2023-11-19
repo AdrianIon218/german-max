@@ -1,0 +1,88 @@
+//   Colors
+$color-blue-light: rgb(97, 183, 230);
+$color-blue-mid: rgb(18, 157, 244);
+$color-blue-dark: rgb(0, 120, 195);
+$color-blue-darker: rgb(2, 99, 160);
+$color-blue-gray: rgb(154, 174, 187);
+$color-blue-7: rgb(0, 101, 163);
+$color-blue-2: rgb(52, 161, 228);
+
+$color-red-light: rgb(254, 217, 204);
+$color-red-mid: rgb(243, 76, 15);
+$color-red-dark: rgb(210, 20, 20);
+
+$color-black: rgb(60, 59, 59);
+$color-gray: #999;
+$color-gray-dark: rgb(131, 131, 132);
+$color-white: rgb(219, 228, 237);
+$color-white-max: rgb(255, 255, 255);
+
+$color-cyan-1: rgb(83, 224, 224);
+$color-cyan-5: rgb(7, 157, 157);
+
+$color-orange-1: rgb(255, 200, 99);
+$color-orange-2: rgb(251, 183, 57);
+$color-orange-3: rgb(219, 150, 20);
+$color-yellow-1: rgb(255, 255, 105);
+$color-yellow-4: yellow;
+$color-yellow-5: rgb(204, 204, 26);
+
+$color-green-1: rgb(59, 233, 59);
+$color-green-2: rgb(104, 202, 89);
+$color-green-3: rgb(26, 151, 26);
+$color-green-4: rgb(14, 139, 14);
+
+$section-color: rgb(169, 202, 231);
+$backgound-green: rgb(199, 239, 193);
+$backgound-orange: rgb(250, 235, 215);
+$backgound-yellow: rgba(rgb(255, 255, 107), 0.8);
+
+// gradients
+$gradient-germany: linear-gradient(
+  90deg,
+  rgba(6, 6, 6, 1) 0%,
+  rgba(238, 36, 36, 1) 50%,
+  rgba(255, 253, 128, 1) 100%
+);
+$gradient-cyan-blue: linear-gradient(
+  to left top,
+  $color-blue-dark,
+  darken($color-cyan-1, 4%)
+);
+$gradient-gray-white: radial-gradient(
+  circle,
+  $color-white 0%,
+  rgb(240, 237, 237) 100%
+);
+
+// animations
+$time-move-in-ani: 1.4s;
+$delay-move-in-ani: 0.3s;
+$time-btn-move-in: 0.8s;
+
+// width
+$width-screen-small: 650px;
+$width-screen-medium: 1000px;
+$width-screen-large: 1400px;
+
+// font
+$default-font-size: 1.2rem;
+
+// space
+$space-vertical: 5rem;
+$space-horizontal: 1rem;
+$padding-LR-section: 5px;
+
+// section
+$section-skew: 6deg;
+$section-border: 2px solid darken(rgb(18, 157, 244), 10%);
+
+// z layers
+$layer-3: 6001;
+$layer-2: 6000;
+$layer-1: 5800;
+$layer-0: 5500;
+$layer-min: 5400;
+
+// paths
+$path-to-images: "../public/images/";

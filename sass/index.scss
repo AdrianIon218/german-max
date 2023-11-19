@@ -1,8 +1,47 @@
-:root{
+@import "abstracts/variables";
 
-}
+@import "abstracts/placeholders";
 
-body{
-    background-color: cyan;
-    color: red;
-}
+@import "abstracts/mixins";
+
+@import "base/base";
+
+@import "base/typography";
+
+@import "base/animations";
+
+@import "layout/sections";
+
+@import "layout/header";
+
+@import "layout/footer";
+
+@import "components/button";
+
+@import "base/utilities";
+
+@import "pages/course";
+
+@import "pages/lesson";
+
+@import "layout/float_grid";
+
+@import "layout/flex";
+
+@import "components/composition";
+
+@import "components/test-box";
+
+@import "components/card";
+
+@import "components/forms";
+
+@import "components/blackdrop";
+
+@import "components/panel";
+
+@import "components/navigation";
+
+@import "components/loading";
+
+@import "components/notification";

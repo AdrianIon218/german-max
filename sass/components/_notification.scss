@@ -1,0 +1,84 @@
+.notification {
+  display: block;
+  position: fixed;
+  top: 0.3rem;
+  border-radius: 1rem;
+  color: $color-gray-dark;
+  font-weight: 600;
+  background-color: $color-white;
+  border: 3px solid;
+  z-index: $layer-min;
+  text-align: center;
+  padding: 4px 6px;
+  left: 35%;
+  right: 35%;
+  box-shadow:
+    rgba(0, 0, 0, 0.07) 0px 1px 2px,
+    rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px,
+    rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px,
+    rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  @include floatclearfix;
+  @include mixin_animation(fade-in-notification, 0.5s, ease-in-out, 0s);
+
+  &--fade-out {
+    @include mixin_animation(fade-out, 0.6s, ease-in-out, 0s);
+  }
+
+  @keyframes fade-in-notification {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      top: 1rem;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+      top: 1rem;
+    }
+    to {
+      opacity: 0;
+      top: 0.3rem;
+    }
+  }
+
+  &--success {
+    background-color: $backgound-green;
+    color: $color-green-3;
+  }
+
+  &--error {
+    background-color: $backgound-orange;
+    color: $color-red-dark;
+  }
+
+  &--warning {
+    background-color: $backgound-orange;
+    color: $color-yellow-5;
+  }
+
+  @include respond(phone) {
+    left: 22%;
+    right: 21%;
+  }
+  @include respond(tab-port) {
+    left: 28%;
+    right: 28%;
+  }
+
+  &__exit {
+    float: right;
+    margin: 0 3px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    font-weight: 800;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

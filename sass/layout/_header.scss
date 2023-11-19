@@ -1,0 +1,44 @@
+.header-container {
+  position: relative;
+  margin-bottom: calc(10rem - 4%);
+}
+
+.header {
+  height: 95vh;
+  max-width: calc(100vw - 1.8rem);
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(150, 242, 242, 0.23) 0%,
+      rgba(18, 157, 244, 0.23) 100%
+    ),
+    url($path-to-images + "berlin_photo1_compressed.jpg");
+  background-size: cover;
+  background-position: center right;
+  clip-path: polygon(0 0, 100% 0%, 100% 75%, 78% 89%, 51% 78%, 20% 91%, 0% 75%);
+  position: relative;
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.logo_box {
+  position: absolute;
+  bottom: -8%;
+  left: 1%;
+  z-index: 5;
+
+  &__img {
+    height: 14rem;
+    min-width: 12rem;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  }
+}
+
+.text-box {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  text-align: center;
+}

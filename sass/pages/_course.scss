@@ -1,0 +1,435 @@
+.course {
+  background-image: linear-gradient(
+    90deg,
+    $color-blue-darker 0%,
+    $section-color 40%,
+    $section-color 60%,
+    $color-blue-dark 100%
+  );
+  padding: 1rem 0.5rem 12rem;
+
+  &-board {
+    border-radius: 1rem;
+    flex: 1;
+    height: 74rem;
+    background-color: $backgound-orange;
+    border: 6px solid;
+  }
+
+  &-title-container {
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    border: 6px dotted;
+  }
+
+  &-plan {
+    display: block;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem !important;
+    border: 3px solid;
+    border-color: inherit;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      padding: 5px;
+      width: 15px;
+      transition: all 0.8s;
+
+      &-thumb {
+        border: 2px rgb(90, 90, 90) solid;
+        border-radius: 1rem;
+        background-color: $color-blue-mid;
+        transition: all 0.8s;
+      }
+
+      &-track {
+        background-color: transparent;
+      }
+    }
+
+    &--A1,
+    &--A2 {
+      &::-webkit-scrollbar {
+        &-thumb {
+          background-color: $color-orange-1;
+        }
+      }
+    }
+
+    &--B1,
+    &--B2 {
+      &::-webkit-scrollbar {
+        &-thumb {
+          background-color: $color-blue-mid;
+        }
+      }
+    }
+
+    &--C1 {
+      &::-webkit-scrollbar {
+        &-thumb {
+          background-color: $color-green-2;
+        }
+      }
+    }
+  }
+
+  &-A1,
+  &-A2 {
+    border-color: $color-orange-1;
+    h1 {
+      @include textgradient--circle(3rem, $color-orange-3, $color-orange-1);
+    }
+    .course-title-container {
+      border-color: $color-orange-3;
+      background-color: darken($backgound-orange, 4%);
+    }
+  }
+
+  &-A1 {
+    .course-plan {
+      background-image: linear-gradient(
+          to right bottom,
+          rgba($color-orange-1, 0.6) 0%,
+          rgba($backgound-orange, 0.5) 100%
+        ),
+        url($path-to-images + "liechtenstein-photo2.jpg");
+    }
+  }
+
+  &-A2 {
+    .course-plan {
+      background-image: linear-gradient(
+          to right bottom,
+          rgba($color-orange-1, 0.6) 0%,
+          rgba($backgound-orange, 0.5) 100%
+        ),
+        url($path-to-images + "graz-photo2.webp");
+    }
+  }
+
+  &-B1,
+  &-B2 {
+    background-color: $section-color;
+    border-color: $color-cyan-5;
+    h1 {
+      @include textgradient--circle(3rem, $color-blue-2, $color-blue-7);
+    }
+    .course-title-container {
+      border-color: $color-blue-7;
+      background-color: lighten($section-color, 4%);
+    }
+  }
+
+  &-B1 {
+    .course-plan {
+      background-image: linear-gradient(
+          to right bottom,
+          rgba(lighten($section-color, 4%), 0.6) 0%,
+          rgba($color-blue-7, 0.5) 100%
+        ),
+        url($path-to-images + "viena-photo1.jpeg");
+    }
+  }
+
+  &-B2 {
+    .course-plan {
+      background-image: linear-gradient(
+          to right bottom,
+          rgba(lighten($section-color, 4%), 0.6) 0%,
+          rgba($color-blue-7, 0.5) 100%
+        ),
+        url($path-to-images + "koln-photo2.webp");
+    }
+  }
+
+  &-C1 {
+    height: 84rem;
+    border-color: $color-green-2;
+    background-color: $backgound-green;
+    h1 {
+      @include textgradient--circle(3rem, $color-green-1, $color-green-3);
+    }
+    .course-title-container {
+      border-color: $color-green-3;
+      background-color: darken($backgound-green, 3%);
+    }
+    .course-plan {
+      background-image: linear-gradient(
+          to right bottom,
+          rgba($backgound-green, 0.6) 0%,
+          rgba($color-green-2, 0.5) 100%
+        ),
+        url($path-to-images + "viena-photo5.jpg");
+    }
+  }
+
+  &__module {
+    min-width: 30%;
+    max-width: 100%;
+    min-height: 5%;
+    position: relative;
+    outline: none;
+
+    &__title {
+      background-color: rgba($color-white-max, 0.84);
+      padding: 5px 15px;
+      border-radius: 1rem;
+      cursor: pointer;
+      border-bottom: 3px $color-gray solid;
+      outline: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+      text-align: center;
+
+      @include floatclearfix;
+    }
+
+    &__title__arrow {
+      margin-left: 4px;
+      float: right;
+
+      &--A1,
+      &--A2 {
+        color: $color-orange-2;
+      }
+
+      &--B1,
+      &--B2 {
+        color: $color-blue-2;
+      }
+
+      &--C1 {
+        color: $color-green-2;
+      }
+    }
+
+    &__ctn {
+      height: 0;
+      visibility: hidden;
+      padding: 0.5rem;
+      left: -2em;
+      right: -2em;
+      transition:
+        opacity 0.3s ease-in,
+        height 0.7s ease-in-out 0.4s;
+      background-color: rgba($color-white-max, 0.8);
+      border-radius: 1rem;
+      border: 2px solid $color-gray;
+      position: absolute;
+      opacity: 0;
+
+      &--open {
+        visibility: visible;
+        opacity: 1;
+        height: 24rem;
+        z-index: $layer-min;
+      }
+
+      &__list {
+        opacity: 0;
+        height: 100%;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          padding: 5px;
+          width: 15px;
+          border-radius: 50px;
+          background-color: #f5f5f5;
+          transition: all 0.8s;
+
+          &-thumb {
+            border: 2px rgb(90, 90, 90) solid;
+            border-radius: 10px;
+            background-color: $color-blue-mid;
+            transition: all 0.8s;
+          }
+
+          &-track {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+          }
+        }
+      }
+
+      &__list--A1,
+      &__list--A2 {
+        &::-webkit-scrollbar {
+          &-thumb {
+            background-color: $color-orange-2;
+          }
+        }
+      }
+
+      &__list--B1,
+      &__list--B2 {
+        &::-webkit-scrollbar {
+          &-thumb {
+            background-color: $color-blue-2;
+          }
+        }
+      }
+
+      &__list--C1 {
+        &::-webkit-scrollbar {
+          &-thumb {
+            background-color: $color-green-2;
+          }
+        }
+      }
+
+      &__list--open {
+        transition: opacity 1s ease-in-out 1.2s;
+        opacity: 1;
+      }
+    }
+  }
+
+  &-lesson {
+    display: inline-block;
+    position: relative;
+    width: 80%;
+
+    &-btn {
+      border-radius: 1rem;
+      padding: 1.2rem;
+      width: 100%;
+      border: 3px solid;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s all ease-in-out;
+      backface-visibility: hidden;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(1.1) translate(0, 5px);
+      }
+
+      &--A1,
+      &--A2 {
+        color: $color-orange-3;
+        background-color: $backgound-orange;
+
+        &:hover {
+          $temp-color: rgba(darken($color-orange-3, 15%), 0.07);
+          box-shadow:
+            $temp-color 0px 1px 2px,
+            $temp-color 0px 2px 4px,
+            $temp-color 0px 4px 8px,
+            $temp-color 0px 8px 16px,
+            $temp-color 0px 16px 32px,
+            $temp-color 0px 32px 64px;
+        }
+      }
+
+      &--B1,
+      &--B2 {
+        color: $color-blue-dark;
+        background-color: rgba($section-color, 0.75);
+
+        &:hover {
+          $temp-color: rgba(darken($color-blue-dark, 15%), 0.07);
+          box-shadow:
+            $temp-color 0px 1px 2px,
+            $temp-color 0px 2px 4px,
+            $temp-color 0px 4px 8px,
+            $temp-color 0px 8px 16px,
+            $temp-color 0px 16px 32px,
+            $temp-color 0px 32px 64px;
+        }
+      }
+
+      &--C1 {
+        color: $color-green-2;
+        background-color: rgba($backgound-green, 0.75);
+
+        &:hover {
+          $temp-color: rgba(darken($color-green-2, 15%), 0.07);
+          box-shadow:
+            $temp-color 0px 1px 2px,
+            $temp-color 0px 2px 4px,
+            $temp-color 0px 4px 8px,
+            $temp-color 0px 8px 16px,
+            $temp-color 0px 16px 32px,
+            $temp-color 0px 32px 64px;
+        }
+      }
+    }
+  }
+
+  &-status {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.4rem 0.5rem;
+    border-radius: 50%;
+    position: absolute;
+    top: -0.6rem;
+    right: -5px;
+    color: $color-gray-dark;
+    border: 2px solid;
+    background-color: rgba($section-color, 0.85);
+    transition: 0.3s all ease-in-out;
+    backface-visibility: hidden;
+    display: flex;
+    gap: 4px;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+
+    .course-lesson-btn:hover ~ & {
+      transform: translate(0px, 0px);
+    }
+
+    .course-lesson-btn:active ~ & {
+      transform: translate(0px, 5px);
+    }
+
+    & > .fa-star {
+      display: inline-block;
+    }
+
+    &--A {
+      background-color: rgba(darken($backgound-orange, 4%), 0.8);
+      border-color: $color-orange-3;
+    }
+
+    &--B {
+      background-color: rgba($section-color, 0.8);
+      border-color: $color-blue-dark;
+    }
+
+    &--C {
+      background-color: rgba($backgound-green, 0.8);
+      border-color: $color-green-2;
+    }
+
+    &--checked {
+      color: $color-yellow-4;
+    }
+  }
+}
+
+.course-pronunciation {
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0.4rem 0.5rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  color: $color-gray-dark;
+  border: 1px dashed $color-gray-dark;
+  padding: 1px 8px;
+  padding: auto;
+  opacity: 0.7;
+}

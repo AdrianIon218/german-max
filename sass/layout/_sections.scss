@@ -1,0 +1,345 @@
+.section-header {
+  @extend %border-section--header;
+  background-color: $section-color;
+  min-height: 85vh;
+}
+
+.section-between {
+  @extend %border-section--between;
+  min-height: 20vh;
+}
+
+.section-about {
+  background-color: $section-color;
+  padding: 30rem $padding-LR-section 16rem;
+}
+
+.section-tests {
+  padding: 18rem $padding-LR-section;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-blue-light, 0.6),
+      rgba($color-blue-dark, 0.7)
+    ),
+    url($path-to-images + "bavaria-photo2.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-top: -12rem;
+  transform: skewY(-$section-skew);
+  position: relative;
+
+  & > * {
+    transform: skewY($section-skew);
+  }
+
+  &__helper {
+    position: absolute;
+    right: 1.3rem;
+    top: 4rem;
+    color: $color-blue-7;
+    cursor: pointer;
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 0.4rem;
+    }
+
+    .helper-btn {
+      font-size: 2rem;
+      color: $color-blue-7;
+      transition: text-shadow 0.4s;
+      &:hover {
+        text-shadow: 2px 1px 1rem $color-white-max;
+      }
+    }
+  }
+}
+
+.section-courses {
+  background-color: $section-color;
+  padding: 7rem $padding-LR-section 25rem;
+
+  &--between {
+    padding: 27rem $padding-LR-section 30rem;
+    margin-top: -17rem;
+  }
+}
+
+.section-sign-up {
+  $local-polygon: polygon(
+    0px 100%,
+    0px 0px,
+    20% 10rem,
+    50% 0px,
+    80% 10rem,
+    100% 0px,
+    100% 100%
+  );
+  margin-top: -20rem;
+  padding: 20rem $padding-LR-section 32rem;
+  background-image: $gradient-cyan-blue;
+  -webkit-clip-path: $local-polygon;
+  clip-path: $local-polygon;
+}
+
+.section-video-bg {
+  max-width: 100%;
+  min-height: 50vh;
+  overflow: auto;
+  background-color: $section-color;
+  position: relative;
+
+  @include respond(tab-land) {
+    min-height: 80vh;
+  }
+
+  .bg-video {
+    width: 100%;
+
+    @include respond(phone) {
+      transform: scaleY(2);
+    }
+  }
+
+  .message-not-found {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-cyan-1;
+    border: 3px double $color-cyan-5;
+    border-radius: 1rem;
+    padding: 3px 1rem;
+    z-index: 1;
+    animation: moveInBottomCenter 0.6s ease-in-out 0.2s 1 normal backwards;
+
+    & > .heading-secondary {
+      &:hover {
+        transform: none;
+        text-shadow: none;
+      }
+    }
+  }
+}
+
+.section-gradient {
+  background-image: $gradient-cyan-blue;
+  padding: 5rem $padding-LR-section;
+}
+
+.section-lazy-loading {
+  min-width: 96vw;
+}
+
+.section-grammer {
+  padding: 1rem 5px;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  h3 {
+    font-size: 1.5rem;
+    color: $color-blue-darker;
+    margin-bottom: 2rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+    color: $color-blue-dark;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  div:nth-last-child(2) {
+    margin-bottom: 4rem;
+  }
+
+  .submitBtn {
+    font-size: 1.2rem;
+  }
+}
+
+.exercise {
+  h3 {
+    color: $color-blue-dark;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  div {
+    margin-top: 6rem;
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    @include mixin_animation(fade-in-effect, 0.5s, ease-in-out, 0s);
+
+    & > button {
+      font-size: 1.2rem;
+      padding: 3px 8px;
+      border-radius: 1rem;
+      border: 4px double;
+      cursor: pointer;
+      background-color: $color-white-max;
+      font-weight: 700;
+      transition: all 0.4s;
+
+      &.false-btn {
+        color: $color-red-mid;
+      }
+
+      &.true-btn {
+        color: $color-green-3;
+      }
+
+      &[disabled] {
+        color: $color-gray;
+        background-color: rgba($color-white-max, 0.8);
+        cursor: default;
+        &:hover,
+        &:active {
+          transform: none;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+
+      &:active {
+        transform: translateY(3px);
+      }
+    }
+
+    @include respond(phone) {
+      width: 80%;
+      justify-content: space-around;
+    }
+  }
+
+  .submitBtn {
+    outline: none;
+  }
+
+  .correct_sentence {
+    color: $color-green-3;
+  }
+
+  .block-transparent {
+    display: inline-block;
+    padding: 2px 5px;
+    background-color: rgba($color-blue-dark, 0.5);
+    border-radius: 1rem;
+    border: 3px double $color-blue-darker;
+    min-width: 4rem;
+    margin: 0 5px;
+    color: $color-white-max;
+    &:before {
+      content: "\200D";
+      display: inline;
+    }
+  }
+
+  .box-btns {
+    flex-wrap: wrap;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
+    margin-bottom: 5rem;
+
+    button {
+      color: $color-blue-dark;
+      border: 3px solid;
+    }
+  }
+
+  .backgd-green {
+    background-color: $backgound-green;
+    color: $color-green-3 !important;
+    border-color: $color-green-3 !important;
+  }
+
+  .backgd-red {
+    background-color: $backgound-orange;
+    color: $color-red-dark !important;
+    border-color: $color-red-dark !important;
+  }
+
+  .choices-match-box {
+    list-style-type: none;
+    height: auto;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 1rem 5px 0 5px;
+
+    li {
+      display: flex;
+      font-size: 1.2rem;
+      color: $color-blue-dark;
+      column-gap: 1rem;
+      margin-bottom: 1rem;
+
+      div {
+        display: inline-block;
+        background-color: $color-white-max;
+        box-shadow: 0 0 5px $color-gray;
+        padding: 3px 8px;
+        border-radius: 0.8rem;
+        margin: 0;
+        flex-basis: 20%;
+        @include respond(phone) {
+          flex-basis: 40%;
+        }
+
+        margin-left: auto;
+        &:last-child {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+
+  .choices-box {
+    padding: 1rem 10px;
+    border-radius: 1rem;
+    border: 0px solid $color-blue-mid;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    background-color: lighten($color-blue-light, 20%);
+
+    button:disabled {
+      color: $color-gray;
+      cursor: auto;
+
+      &:hover,
+      &:active {
+        transform: none;
+      }
+    }
+  }
+
+  .correct-choices {
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+    list-style-type: none;
+    border-color: $color-green-3;
+    color: $color-green-3;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background-color: $backgound-green;
+    @include mixin_animation(fade-in-effect, 0.5s, ease-in-out, 0s);
+  }
+
+  .sentence-builder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}
