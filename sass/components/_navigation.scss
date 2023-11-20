@@ -1,4 +1,11 @@
 .navigation {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+
+  /* the round btn for menu*/
   &__btn {
     position: fixed;
     top: 1.5rem;
@@ -89,8 +96,8 @@
     background-image: radial-gradient($color-cyan-1, $color-cyan-5);
     transition: all 0.6s cubic-bezier(0.85, 0, 0.07, 1);
 
-    &.navigation__menu-open {
-      transform: scale(80);
+    &.navigation__background--open {
+      transform: scale(100);
 
       & ~ .navigation__menu {
         visibility: visible;
@@ -102,7 +109,7 @@
   &__menu {
     position: fixed;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     top: 0;
     right: 0;
     z-index: $layer-1;
@@ -116,13 +123,13 @@
     min-width: 80%;
     top: 50%;
     left: 50%;
-    transform: translate(-53%, -70%);
+    transform: translate(-53%, -60%);
     list-style: none;
     text-align: center;
 
     &__item {
       width: 100%;
-      margin: 1rem;
+      margin: .7rem 1rem;
     }
   }
 
@@ -147,11 +154,7 @@
       transition: all 0.6s;
 
       @include respond(tab-port) {
-        font-size: 1.5rem;
-      }
-
-      @include respond(tab-port) {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
     }
 

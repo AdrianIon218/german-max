@@ -16,7 +16,7 @@ const MainMenu = () => {
     if (localStorage.getItem("userAccount")) {
       setMenuList(navListLogedIn);
     }
-    setShownMenu((oltState) => !oltState);
+    setShownMenu((oldState) => !oldState);
   };
 
   const linkClick = (btn: string) => {
@@ -36,7 +36,7 @@ const MainMenu = () => {
             className="navigation__link"
             onClick={() => linkClick(item.btn)}
           >
-            <i className={item.icon} /> &nbsp;&nbsp;{item.btn}
+            <i className={item.icon} /> {item.btn}
           </Link>
         </li>
       )),
@@ -44,7 +44,7 @@ const MainMenu = () => {
   );
 
   return (
-    <div className="navigation u-disabled-user-selector">
+    <div className="navigation">
       <div className="navigation__btn" onClick={triggerMenu}>
         <span
           className={`navigation__btn__icon ${
@@ -54,9 +54,10 @@ const MainMenu = () => {
           &nbsp;
         </span>
       </div>
+
       <div
         className={`navigation__background ${
-          showMenu ? "navigation__menu-open" : ""
+          showMenu ? "navigation__background--open" : ""
         }`}
       />
       <nav className="navigation__menu">

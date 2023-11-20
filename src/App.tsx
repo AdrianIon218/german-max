@@ -9,8 +9,6 @@ function App() {
         <Route path="" element={<MainLayout />}>
         
         </Route>
-        <Route path="/a" element={<p>a</p>} />
-        <Route path="/" element={<p>b</p>}/>
       </Routes>
     </BrowserRouter>
   )
