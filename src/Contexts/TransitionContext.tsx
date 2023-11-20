@@ -15,7 +15,7 @@ function TransitionContext(props: IPropsChildren) {
     >
       <div
         className={`navigation__background ${
-          transitionEffect ? "navigation__menu-open" : ""
+          transitionEffect ? "navigation__background--open" : ""
         }`}
       />
       {props.children}
