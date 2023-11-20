@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
-import { IProps } from "../Helpers/CommonInterfaces";
+import { IPropsChildren } from "./CommonInterfaces";
 
-const ScrollToTop = (props: IProps) => {
+const ScrollToTop = (props: IPropsChildren) => {
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
