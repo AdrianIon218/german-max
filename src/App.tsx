@@ -1,9 +1,6 @@
-import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 
-function T(){
-  return <p>hei</p>
-}
 
 const router = createBrowserRouter([
   {
