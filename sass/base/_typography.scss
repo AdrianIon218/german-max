@@ -30,6 +30,8 @@ h1 {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 6px;
+    margin-top: 5px;
+
     @include mixin_animation(
       moveInRight,
       $time-move-in-ani,
