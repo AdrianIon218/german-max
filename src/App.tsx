@@ -1,17 +1,22 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
+
+function T(){
+  return <p>hei</p>
+}
+
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<MainLayout />,
+    children: [{
+      element: <p>hei</p>
+    }]
+  }]);
 
 function App() {
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-        
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
