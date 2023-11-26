@@ -1,0 +1,22 @@
+{
+  "photos": [
+    {
+      "photo": "münchen_photo1.jpg",
+      "alt": "Munich",
+      "class": "composition__photo--p1",
+      "title": "München - Germania"
+    },
+    {
+      "photo": "viena-photo1.jpeg",
+      "alt": "Viena",
+      "class": "composition__photo--p2",
+      "title": "Viena - Austria"
+    },
+    {
+      "photo": "zurich-photo1.jpg",
+      "alt": "Zurich",
+      "class": "composition__photo--p3",
+      "title": "Zürich - Elveția"
+    }
+  ]
+}
