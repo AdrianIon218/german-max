@@ -71,3 +71,12 @@
     outline-offset: 6px;
   }
 }
+
+@keyframes backdrop-in {
+  from {
+    transform: translateY(50vh) scale(.5);
+  }
+  to{
+    transform: scale(1);
+  }
+}

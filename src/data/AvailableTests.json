@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "titleBox": "Nivel A1",
+      "iconClasses": "fas fa-chess-pawn",
+      "linkTest": ""
+    },
+    {
+      "titleBox": "Nivel A2",
+      "iconClasses": "fas fa-chess-knight",
+      "linkTest": ""
+    },
+    {
+      "titleBox": "Nivel B1",
+      "iconClasses": "fas fa-chess-bishop",
+      "linkTest": ""
+    },
+    {
+      "titleBox": "Nivel B2",
+      "iconClasses": "fas fa-chess-rook",
+      "linkTest": ""
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import Header from './Header'
 import AboutSection from './AboutSection';
+import TestSection from './TestSection';
 
 function MainPage() {
   const isUserLogged = useLoaderData();
@@ -10,6 +11,7 @@ function MainPage() {
     <Header />
     <main>
       <AboutSection />
+      <TestSection />
       {isUserLogged ? "da":"nu" }
     </main>
     </>
