@@ -4,7 +4,7 @@ import AboutSection from './AboutSection';
 import TestSection from './TestSection';
 import CourseAvailableContext from '../../Contexts/CourseAvailableContext';
 import CoursesSection from './CoursesSection';
-import RegisterForm from '../Register/RegisterForm';
+import RegisterForm from '../Auth/RegisterForm';
 
 function MainPage() {
   const isUserLogged = useLoaderData();

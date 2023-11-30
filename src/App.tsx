@@ -3,6 +3,7 @@ import MainLayout from "./Layouts/MainLayout";
 import { lazy } from "react";
 
 import { loader as mainPageLoader } from "./Pages/Home/MainPage";
+import Login from "./Pages/Auth/Login";
 
 const MainPage = lazy(() => import("./Pages/Home/MainPage"));
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
         element: <MainPage />,
         loader: mainPageLoader
       },
+      {
+        path:"/login",
+        element: <Login />
+      }
       ]
   }]);
 
