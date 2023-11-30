@@ -9,6 +9,7 @@ const reducer = (
     type: "ACCEPTED" | "INVALID_PASS" | "NO_USER" | "SERVER_ERR" | "DEACTIVATE";
   },
 ) => {
+  console.log(state)
   switch (action.type) {
     case "ACCEPTED":
       return {
