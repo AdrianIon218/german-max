@@ -14,7 +14,6 @@ export default function MainLayout() {
         <Suspense fallback={<LoadingLoader />}>
           <Outlet />
         </Suspense>
-        <div style={{width:"100%", height:"50vh"}}></div>
        <Footer />
       </ScrollToTop>
     </TransitionContext>
