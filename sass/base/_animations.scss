@@ -80,3 +80,13 @@
     transform: scale(1);
   }
 }
+
+@keyframes backdrop-out {
+  from {
+    transform: scale(1);
+  }
+  to{
+    opacity: 0%;
+    transform: scale(1) translateY(30vh);
+  }
+}

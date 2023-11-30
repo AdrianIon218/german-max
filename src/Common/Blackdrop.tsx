@@ -1,12 +1,18 @@
+import { useState } from "react";
+
 interface IBlackdropProps {
   children: any;
-  showState: boolean;
   onClose: ()=>void
 }
 
-export default function Blackdrop({children, showState, onClose}: IBlackdropProps) {
+export default function Blackdrop({children, onClose}: IBlackdropProps) {
+  const [isClosing, setClosing] = useState(false);
+
   function exitBackdrop() {
-    onClose();
+    setClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 450);
   }
 
   function breakPropagation(
@@ -15,9 +21,8 @@ export default function Blackdrop({children, showState, onClose}: IBlackdropProp
     event.stopPropagation();
   }
 
-  return showState && 
-  (<section className="blackdrop" onClick={exitBackdrop}>
-      <div className="blackdrop__content" onClick={breakPropagation}>
+  return <section className="blackdrop" onClick={exitBackdrop}>
+      <div className={`blackdrop__content ${isClosing?"blackdrop__content--closing":""}`} onClick={breakPropagation}>
         <div className="blackdrop__exit">
           <div onClick={exitBackdrop} className="blackdrop__exit__btn">
             &times;
@@ -25,5 +30,5 @@ export default function Blackdrop({children, showState, onClose}: IBlackdropProp
         </div>
         {children}
       </div>
-    </section>);
+    </section>;
 }

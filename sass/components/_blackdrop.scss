@@ -15,8 +15,11 @@
     flex: 1;
     position: relative;
     transform: scale(0.5);
-    transition: all 0.5s;
     @include mixin_animation(backdrop-in, .4s, ease-in, 0s);
+  }
+
+  .blackdrop__content.blackdrop__content--closing{
+    @include mixin_animation(backdrop-out, .4s, ease-in, 0s);
   }
 
   &__exit {

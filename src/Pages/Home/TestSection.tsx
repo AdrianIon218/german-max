@@ -18,9 +18,9 @@ export default function TestSection() {
 
   return (
     <>
-      <Blackdrop showState={showBackdrop} onClose={()=>setShowBackdrop(false)}>
+      {showBackdrop && <Blackdrop onClose={()=>setShowBackdrop(false)}>
         <TestDetails />
-      </Blackdrop>
+      </Blackdrop>}
       <section className="section-tests section-between">
         <div className="section-tests__helper">
           <div className="btn--cleared helper-btn" onClick={()=>{setShowBackdrop(oldState => !oldState)}}>
