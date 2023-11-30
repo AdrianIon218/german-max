@@ -16,20 +16,14 @@ export default function CoursesSection({
           ? "section-courses--between section-between"
           : "section-header"
       } `}
-      id="section-course-id"
     >
       <div className="u-center-text u-margin-bottom-medium">
-        <h2 className="heading-secondary">Cursuri disponibile</h2>
+        <h2 className="heading-secondary" id="section-course-id">Cursuri disponibile</h2>
       </div>
       <div className="flex-row--centered">
         {coursesContext.map((course, index) => (
           <CardCourse {...course} key={index} />
         ))}
-      </div>
-      <div className="u-center-text u-margin-top--medium">
-        <a href="#" className="btn btn--blue">
-          Află ce curs ți se potrivește
-        </a>
       </div>
     </section>
   );

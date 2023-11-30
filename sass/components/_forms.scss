@@ -1,5 +1,4 @@
 .box-mountain-bg {
-  $local-image: $path-to-images + "germany-photo1.jpeg";
   width: 80%;
   background-image: linear-gradient(
       105deg,
@@ -7,7 +6,7 @@
       rgba($color-white, 0.8) 57%,
       transparent 57%
     ),
-    url($local-image);
+    url("/germany-photo1.jpeg");
   background-size: cover;
   min-height: 40rem;
   border-radius: 10px;
@@ -20,7 +19,7 @@
         rgba($color-white, 0.8) 0%,
         rgba($color-white, 0.8) 100%
       ),
-      url($local-image);
+      url("/germany-photo1.jpeg");
   }
 
   &__form {

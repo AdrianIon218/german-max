@@ -4,9 +4,11 @@ import AboutSection from './AboutSection';
 import TestSection from './TestSection';
 import CourseAvailableContext from '../../Contexts/CourseAvailableContext';
 import CoursesSection from './CoursesSection';
+import RegisterForm from '../Register/RegisterForm';
 
 function MainPage() {
   const isUserLogged = useLoaderData();
+  console.log(isUserLogged ? "1":"0")
 
   return (
     <>
@@ -16,9 +18,8 @@ function MainPage() {
       <TestSection />
       <CourseAvailableContext>
           {<CoursesSection location="home" />}
-      {isUserLogged ? "da":"nu" }
-
       </CourseAvailableContext>
+      {!isUserLogged && <RegisterForm location="home" />}
     </main>
     </>
   )
