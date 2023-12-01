@@ -123,7 +123,7 @@ export default function Login() {
                 <div className="u-margin-bottom-medium u-center-text">
                   <h2 className="heading-secondary">Autentificare</h2>
                   <span className="span-header-block">
-                    creeare cont nou &ensp;
+                    nu ai cont ?&ensp;
                     <span className="span-pointer">
                       <LinkTansition
                         to="/signup"

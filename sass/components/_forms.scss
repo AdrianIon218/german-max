@@ -47,7 +47,7 @@
       rgba($color-white, 0.7) 0%,
       rgba($color-blue-gray, 0.8) 100%
     ),
-    url($path-to-images + "switzerland.jpg");
+    url("/switzerland.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
