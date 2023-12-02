@@ -8,7 +8,6 @@ import RegisterForm from '../Auth/RegisterForm';
 
 function MainPage() {
   const isUserLogged = useLoaderData();
-  console.log(isUserLogged ? "1":"0")
 
   return (
     <>
@@ -29,4 +28,4 @@ export function loader(){
     return localStorage.getItem("userAccount");
 }
 
-export default MainPage
+export default MainPage;

@@ -3,16 +3,17 @@ import MainLayout from "./Layouts/MainLayout";
 import { lazy } from "react";
 
 import { loader as mainPageLoader } from "./Pages/Home/MainPage";
-import Login from "./Pages/Auth/Login";
-import RegisterForm from "./Pages/Auth/RegisterForm";
-import Contacts from "./Pages/Other/Contacts";
-
 const MainPage = lazy(() => import("./Pages/Home/MainPage"));
+const Login = lazy(() => import("./Pages/Auth/Login"));
+const RegisterForm = lazy(() => import("./Pages/Auth/RegisterForm"));
+const Contacts = lazy(() => import("./Pages/Other/Contacts"));
+const NoPage = lazy(() => import("./Pages/Other/NoPage"));
 
 const router = createBrowserRouter([
   {
     path:"/",
     element:<MainLayout />,
+    errorElement:<NoPage />,
     children: [
       {
         path:"/",
@@ -38,4 +39,4 @@ function App() {
   return <RouterProvider router={router} />
 }
 
-export default App
+export default App;

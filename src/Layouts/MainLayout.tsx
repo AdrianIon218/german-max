@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import MainMenu from "./MainMenu";
 
 export default function MainLayout() {
+  
   return (
     <TransitionContext>
       <ScrollToTop>
@@ -14,7 +15,7 @@ export default function MainLayout() {
         <Suspense fallback={<LoadingLoader />}>
           <Outlet />
         </Suspense>
-       <Footer />
+        <Footer />
       </ScrollToTop>
     </TransitionContext>
   );
