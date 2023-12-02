@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 import Notification, { NotificationType } from "../../Common/Notfication";
+import { useLoaderData } from "react-router-dom";
 
 function Contacts() {
-  const userEmail = localStorage.getItem("userAccount");
+  const userEmail = useLoaderData();
   const emailRef = useRef<HTMLInputElement>(null);
   const topicRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
@@ -79,6 +80,7 @@ function Contacts() {
               id="email"
               required
               ref={emailRef}
+              name="email"
             />
             <label
               htmlFor="email"
@@ -96,6 +98,7 @@ function Contacts() {
             id="topic"
             required
             ref={topicRef}
+            name="topic"
           />
           <label htmlFor="topic" className="form__label form__label__required">
             Topic
@@ -126,6 +129,10 @@ function Contacts() {
       </form>
     </section>
   );
+}
+
+export function loader(){
+  return localStorage.getItem("userAccount");
 }
 
 export default Contacts;

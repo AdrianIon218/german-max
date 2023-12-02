@@ -52,6 +52,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: $color-blue-darker;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
   @include respond(tab-port) {
     width: 100%;
@@ -143,6 +144,7 @@
       cursor: grab;
       padding: 5px;
       width: 12px;
+      border-radius: 1rem;
       background-color: $color-white-max;
     }
 
