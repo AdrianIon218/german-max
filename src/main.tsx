@@ -1,15 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx';
-import { Provider } from 'react-redux';
 import "../sass/index.scss";
-import { createStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import notificationReducer from './SliceReducers/NotificationSlice.ts';
 
-const x = createStore(function reducer(){});
+
+const store = configureStore({
+  reducer:{
+    notification: notificationReducer
+  }
+});
+
+export type RootState = ReturnType<typeof store.getState>;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={x}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,

@@ -3,12 +3,12 @@ import MainLayout from "./Layouts/MainLayout";
 import { lazy } from "react";
 
 import { loader as mainPageLoader } from "./Pages/Home/MainPage";
-import { loader as supportLoader } from "./Pages/Other/Contacts";
+import { loader as supportLoader } from "./Pages/Other/Support";
 
 const MainPage = lazy(() => import("./Pages/Home/MainPage"));
 const Login = lazy(() => import("./Pages/Auth/Login"));
 const RegisterForm = lazy(() => import("./Pages/Auth/RegisterForm"));
-const Contacts = lazy(() => import("./Pages/Other/Contacts"));
+const Support = lazy(() => import("./Pages/Other/Support"));
 const NoPage = lazy(() => import("./Pages/Other/NoPage"));
 
 const router = createBrowserRouter([
@@ -32,11 +32,9 @@ const router = createBrowserRouter([
       },
       {
         path:"/contacts",
-        element: <Contacts />,
+        element: <Support />,
         loader: supportLoader
-      },
-      
-      ]
+      }]
   }]);
 
 function App() {

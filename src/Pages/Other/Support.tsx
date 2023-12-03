@@ -2,8 +2,10 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import Notification, { NotificationType } from "../../Common/Notfication";
 import { useLoaderData } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../../SliceReducers/NotificationSlice";
 
-function Contacts() {
+function Support() {
   const userEmail = useLoaderData();
   const emailRef = useRef<HTMLInputElement>(null);
   const topicRef = useRef<HTMLInputElement>(null);
@@ -14,8 +16,11 @@ function Contacts() {
     type: NotificationType.NO_TYPE,
   });
 
+  const dispatch =  useDispatch();
+
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    dispatch(showNotification("adi este tare", NotificationType.SUCCESS));
     const emailAdress = userEmail ?? emailRef.current!.value.trim();
     const topic = topicRef.current!.value.trim();
     const message = messageRef.current!.value.trim();
@@ -135,4 +140,4 @@ export function loader(){
   return localStorage.getItem("userAccount");
 }
 
-export default Contacts;
+export default Support;
