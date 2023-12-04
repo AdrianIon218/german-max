@@ -5,11 +5,12 @@ import "../sass/index.scss";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import notificationReducer from './SliceReducers/NotificationSlice.ts';
-
+import loadingReducer from "./SliceReducers/LoadingSlice.ts";
 
 const store = configureStore({
   reducer:{
-    notification: notificationReducer
+    notification: notificationReducer,
+    loading: loadingReducer
   }
 });
 

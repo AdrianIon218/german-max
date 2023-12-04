@@ -36,6 +36,16 @@
   }
 }
 
+.position-over{
+  display: block;
+  position: fixed;
+  top: 0.3rem;
+  z-index: $layer-min;
+  text-align: center;
+  left: 35%;
+  right: 35%;
+}
+
 @keyframes lds-ellipsis-grow {
   0% {
     transform: scale(0);

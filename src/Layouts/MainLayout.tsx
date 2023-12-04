@@ -9,18 +9,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../main";
 import Notification from "../Common/Notfication";
 import { hideNotification } from "../SliceReducers/NotificationSlice";
+import LoadingSpinner from "../Common/LoadingSpinner";
 
 export default function MainLayout() {
   const {isShown:isNotificationShwon, message:notificationMessage, type:notificationType} = useSelector((store:RootState) => store.notification);
+  const {isLoading} = useSelector((store:RootState) => store.loading);
   const dispatch = useDispatch();
-  console.log(isNotificationShwon);
   
   return (
     <TransitionContext>
       <ScrollToTop>
-        { isNotificationShwon && <Notification message={notificationMessage} type={notificationType}
-          deleteNotification={() => dispatch(hideNotification())}/>
+        {isNotificationShwon && (<Notification message={notificationMessage} type={notificationType}
+          deleteNotification={() => dispatch(hideNotification())}/>)
         }
+        {isLoading && (<LoadingSpinner />)}
         <MainMenu />
         <Suspense fallback={<LoadingLoader />}>
           <Outlet />

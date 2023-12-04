@@ -4,12 +4,11 @@ import axios from "axios";
 import Notification, { NotificationType } from "../../Common/Notfication";
 
 const reducer = (
-  state: { isShown: boolean },
+  _: { isShown: boolean },
   action: {
     type: "ACCEPTED" | "INVALID_PASS" | "NO_USER" | "SERVER_ERR" | "DEACTIVATE";
   },
 ) => {
-  console.log(state)
   switch (action.type) {
     case "ACCEPTED":
       return {

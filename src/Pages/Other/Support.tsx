@@ -1,41 +1,42 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useState } from "react";
 import { NotificationType } from "../../Common/Notfication";
 import { useLoaderData } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
+import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 
 function Support() {
-  const userEmail = useLoaderData();
-  const emailRef = useRef<HTMLInputElement>(null);
-  const topicRef = useRef<HTMLInputElement>(null);
-  const messageRef = useRef<HTMLTextAreaElement>(null);
-
+  const userFromStorage = useLoaderData();
   const dispatch =  useDispatch();
+
+  const [userEmail, setUserEmail] = useState("");
+  const [topicMessage, setTopic] = useState("");
+  const [messageText, setMessage] = useState("");
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    
-    const emailAdress = userEmail ?? emailRef.current!.value.trim();
-    const topic = topicRef.current!.value.trim();
-    const message = messageRef.current!.value.trim();
+    dispatch(showLoading());
 
     axios.post("http://localhost:5000/contacts", {
-        email: emailAdress,
-        topic: topic,
-        message: message,
+        email: userFromStorage || userEmail,
+        topic: topicMessage,
+        message: messageText,
       })
       .then((response) => {
         const { status } = response.data;
+        dispatch(hideLoading());
         if (status === "sent") {
-          topicRef.current!.value = "";
-          messageRef.current!.value = "";
+          setUserEmail("");
+          setTopic("");
+          setMessage("");
           dispatch(showNotification("Mesaj trimis !", NotificationType.SUCCESS));
         } else {
           dispatch(showNotification("Eroare, încercați mai târziu !", NotificationType.ERROR));
         }
       })
       .catch(() => {
+        dispatch(hideLoading());
         dispatch(showNotification("Eroare, încercați mai târziu !", NotificationType.ERROR));
       });
   }
@@ -46,16 +47,17 @@ function Support() {
         <div className="u-margin-bottom-medium u-center-text">
           <h2 className="heading-secondary">Formular de contact</h2>
         </div>
-        {!userEmail && (
+        {!userFromStorage && (
           <div className="form__group">
             <input
               type="email"
               className="form__input blue_border"
               placeholder="Adresă ta de email *"
               id="email"
-              required
-              ref={emailRef}
               name="email"
+              value={userEmail}
+              onChange={(email)=>setUserEmail(email.target.value.trim())}
+              required
             />
             <label
               htmlFor="email"
@@ -66,29 +68,23 @@ function Support() {
           </div>
         )}
         <div className="form__group">
-          <input
-            type="text"
+          <input type="text" id="topic" name="topic" required
             className="form__input blue_border"
-            placeholder="Topic *"
-            id="topic"
-            required
-            ref={topicRef}
-            name="topic"
+            placeholder="Topic *" 
+            value={topicMessage}   
+            onChange={(topic)=>setTopic(topic.target.value.trim())}
           />
           <label htmlFor="topic" className="form__label form__label__required">
             Topic
           </label>
         </div>
         <div className="form__group">
-          <textarea
-            name="message"
+          <textarea name="message" id="message"
             className="form__input form__textarea blue_border"
-            id="message"
-            rows={10}
-            ref={messageRef}
-            minLength={5}
-            placeholder="Mesaj *"
+            rows={10} minLength={5} placeholder="Mesaj *"
             required
+            value={messageText}
+            onChange={(message)=>setMessage(message.target.value.trim())}
           />
           <label
             htmlFor="message"

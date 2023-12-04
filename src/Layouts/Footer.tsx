@@ -1,5 +1,6 @@
 import imgLogo from "/GermanMax-logo.png";
 import LinkTansition from "../Common/LinkTransition";
+
 const footerNav = ["Suport", "Recenzi", "Termeni și condiți", "Sugesti"];
 
 export default function Footer() {
