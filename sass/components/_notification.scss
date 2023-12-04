@@ -1,17 +1,10 @@
 .notification {
-  display: block;
-  position: fixed;
-  top: 0.3rem;
   border-radius: 1rem;
   color: $color-gray-dark;
   font-weight: 600;
   background-color: $color-white;
   border: 3px solid;
-  z-index: $layer-min;
-  text-align: center;
   padding: 4px 6px;
-  left: 35%;
-  right: 35%;
   box-shadow:
     rgba(0, 0, 0, 0.07) 0px 1px 2px,
     rgba(0, 0, 0, 0.07) 0px 2px 4px,

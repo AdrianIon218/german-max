@@ -31,7 +31,7 @@ function Notification({ message, type, deleteNotification }: LocProps) {
 
   return (
     <div
-      className={`notification 
+      className={`notification position-over
         ${
           type === NotificationType.ERROR
             ? "notification--error"
