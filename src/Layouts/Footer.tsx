@@ -1,12 +1,12 @@
 import imgLogo from "/GermanMax-logo.png";
 import LinkTansition from "../Common/LinkTransition";
-const footerNav = ["Contacte", "Recenzi", "Termeni și condiți", "Sugesti"];
+const footerNav = ["Suport", "Recenzi", "Termeni și condiți", "Sugesti"];
 
 export default function Footer() {
   const footerNavElements = footerNav.map((item, index) => (
     <li className="footer__item" key={index}>
       <LinkTansition
-        to={`${item === "Contacte" ? "/contacts" : "#"}`}
+        to={`${item === "Suport" ? "/contacts" : "#"}`}
         className="footer__link"
       >
         {item}

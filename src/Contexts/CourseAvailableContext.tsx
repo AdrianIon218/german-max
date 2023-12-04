@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { AvailableCourses } from "../data/availableCourses";
 import { IPropsCardCourse } from "../SpecialComponents/CardCourse";
 import axios from "axios";
 
-export const CourseAvailableCtx = React.createContext<IPropsCardCourse[]>([]);
 type CourseResponse = {
   level: "A1" | "A2" | "B1" | "B2" | "C1";
   wordsNum: number;
   lessonsNum: number;
   testsNum: number;
 };
+
+export const CourseAvailableCtx = React.createContext<IPropsCardCourse[]>([]);
 
 function CourseAvailableContext({ children }: {children:any}) {
   const [availableCourse, setAvailableCourse] = useState(AvailableCourses);
@@ -46,6 +47,10 @@ function CourseAvailableContext({ children }: {children:any}) {
       {children}
     </CourseAvailableCtx.Provider>
   );
+}
+
+export function useCourseAvailable(){
+  return useContext(CourseAvailableCtx);
 }
 
 export default CourseAvailableContext;

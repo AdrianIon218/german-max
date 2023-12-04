@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useRef, useState } from "react";
-import Notification, { NotificationType } from "../../Common/Notfication";
+import { useRef } from "react";
+import { NotificationType } from "../../Common/Notfication";
 import { useLoaderData } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
@@ -10,22 +10,17 @@ function Support() {
   const emailRef = useRef<HTMLInputElement>(null);
   const topicRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const [notification, setNotification] = useState({
-    isShown: false,
-    message: "",
-    type: NotificationType.NO_TYPE,
-  });
 
   const dispatch =  useDispatch();
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    dispatch(showNotification("adi este tare", NotificationType.SUCCESS));
+    
     const emailAdress = userEmail ?? emailRef.current!.value.trim();
     const topic = topicRef.current!.value.trim();
     const message = messageRef.current!.value.trim();
-    axios
-      .post("http://localhost:5000/contacts", {
+
+    axios.post("http://localhost:5000/contacts", {
         email: emailAdress,
         topic: topic,
         message: message,
@@ -35,43 +30,18 @@ function Support() {
         if (status === "sent") {
           topicRef.current!.value = "";
           messageRef.current!.value = "";
-          setNotification({
-            isShown: true,
-            message: "Mesaj trimis !",
-            type: NotificationType.SUCCESS,
-          });
+          dispatch(showNotification("Mesaj trimis !", NotificationType.SUCCESS));
         } else {
-          setNotification({
-            isShown: true,
-            message: "Eroare, încercați mai târziu !",
-            type: NotificationType.ERROR,
-          });
+          dispatch(showNotification("Eroare, încercați mai târziu !", NotificationType.ERROR));
         }
       })
       .catch(() => {
-        setNotification({
-          isShown: true,
-          message: "Eroare, încercați mai târziu !",
-          type: NotificationType.ERROR,
-        });
+        dispatch(showNotification("Eroare, încercați mai târziu !", NotificationType.ERROR));
       });
   }
 
   return (
     <section className="section-header form u_padding_down--big flex-column--centered">
-      {notification.isShown && (
-        <Notification
-          message={notification.message}
-          type={notification.type}
-          deleteNotification={() =>
-            setNotification({
-              isShown: false,
-              message: "",
-              type: NotificationType.NO_TYPE,
-            })
-          }
-        />
-      )}
       <form onSubmit={submit} className="forn box-form u-margin-top--small">
         <div className="u-margin-bottom-medium u-center-text">
           <h2 className="heading-secondary">Formular de contact</h2>

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { TransitionCtx } from "../Contexts/TransitionContext";
+import { useNotification } from "../Contexts/TransitionContext";
 
 interface IProps {
   to: string;
@@ -12,7 +11,7 @@ interface IProps {
 }
 
 function LinkTansition(props: IProps) {
-  const context = useContext(TransitionCtx);
+  const context = useNotification();
 
   const navigate = useNavigate();
   const transitionPlay = () => {

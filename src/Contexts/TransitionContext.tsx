@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { IPropsChildren } from "../Common/CommonInterfaces";
+
 export const TransitionCtx = React.createContext<null | {
   getState: boolean;
   setTransition: any;
@@ -21,6 +22,10 @@ function TransitionContext(props: IPropsChildren) {
       {props.children}
     </TransitionCtx.Provider>
   );
+}
+
+export function useNotification(){
+  return useContext(TransitionCtx);
 }
 
 export default TransitionContext;

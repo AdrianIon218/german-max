@@ -1,13 +1,12 @@
 import CardCourse from "../../SpecialComponents/CardCourse";
-import { useContext } from "react";
-import { CourseAvailableCtx } from "../../Contexts/CourseAvailableContext";
+import { useCourseAvailable } from "../../Contexts/CourseAvailableContext";
 
 export default function CoursesSection({
   location,
 }: {
   location: "home" | "own-page";
 }) {
-  const coursesContext = useContext(CourseAvailableCtx);
+  const coursesContext = useCourseAvailable();
 
   return (
     <section
