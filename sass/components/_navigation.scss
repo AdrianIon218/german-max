@@ -168,14 +168,15 @@
 }
 
 body:has(.navigation__background--open){
+  padding-right: 1.9rem;
   overflow: hidden;
 }
 
 body:not(:has(.navigation__background--open)){
-  @include mixin_animation(overflow-delay, .1s, ease-in, .15s);
+  @include mixin_animation(show-overflow-delay, .1s, ease-in, .15s);
 }
 
-@keyframes overflow-delay {
+@keyframes show-overflow-delay {
   from{
     overflow: hidden;
   }

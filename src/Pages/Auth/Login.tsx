@@ -1,115 +1,69 @@
-import { useRef, useReducer, useState } from "react";
+import { useState } from "react";
 import LinkTansition from "../../Common/LinkTransition";
 import axios from "axios";
-import Notification, { NotificationType } from "../../Common/Notfication";
-
-const reducer = (
-  _: { isShown: boolean },
-  action: {
-    type: "ACCEPTED" | "INVALID_PASS" | "NO_USER" | "SERVER_ERR" | "DEACTIVATE";
-  },
-) => {
-  switch (action.type) {
-    case "ACCEPTED":
-      return {
-        isShown: false,
-        message: "Te-ai autentificat !",
-        notificationType: NotificationType.SUCCESS,
-      };
-    case "INVALID_PASS":
-      return {
-        isShown: true,
-        message: "Parola este incorectă !",
-        notificationType: NotificationType.ERROR,
-      };
-    case "NO_USER":
-      return {
-        isShown: true,
-        message: "Nu există utilizator cu această adresă de mail !",
-        notificationType: NotificationType.NO_TYPE,
-      };
-    case "SERVER_ERR":
-      return {
-        isShown: true,
-        message: "Eroare de server, încerca-ți mai târziu !",
-        notificationType: NotificationType.ERROR,
-      };
-    default:
-      return {
-        isShown: false,
-        message: "",
-        notificationType: NotificationType.NO_TYPE,
-      };
-  }
-};
+import { NotificationType } from "../../Common/Notfication";
+import { useDispatch, useSelector } from "react-redux";
+import { showNotification } from "../../SliceReducers/NotificationSlice";
+import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
+import { RootState } from "../../SliceReducers/store";
 
 export default function Login() {
-  const [notification, dispatchNotification] = useReducer(reducer, {
-    isShown: false,
-    message: "",
-    notificationType: NotificationType.NO_TYPE,
-  });
-
-  const [pageTarget, setPage] = useState("");
-  const email = useRef<HTMLInputElement>(null);
-  const password = useRef<HTMLInputElement>(null);
+  const [passwordUsed, setPasswordUsed] = useState("");
+  const [emailUsed, setEmailUsed] = useState("");
   const [passNumMistakes, setPassMistakes] = useState(0);
+  const [pageTarget, setPage] = useState("");
+  const [displayPass, setDisplayPass] = useState(false);
+
+  const dispatch = useDispatch();
+  const isNotificationShwon = useSelector((store:RootState) => store.notification.isShown);
+  const isLoadingSignShown = useSelector((store:RootState) => store.loading.isLoading);
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const emailEntered = email.current!.value;
-    const passwordEntered = password.current!.value;
+    dispatch(showLoading());
 
     axios
       .post("http://localhost:5000/login/", {
-        email: emailEntered,
-        password: passwordEntered,
+        email: emailUsed,
+        password: passwordUsed,
       })
       .then((response) => {
         const { status } = response.data;
-        password.current!.value = "";
+        dispatch(hideLoading());
+        setPasswordUsed("");
+        setDisplayPass(false);
 
         switch (status) {
           case "USER_OK":
-            email.current!.value = "";
+            setEmailUsed("");
             const { lastLevel } = response.data;
-            localStorage.setItem("userAccount", emailEntered);
-            dispatchNotification({ type: "ACCEPTED" });
+            localStorage.setItem("userAccount", emailUsed);
             setPage(`/course-plan/${lastLevel}`);
             break;
 
           case "NO_USER":
-            dispatchNotification({ type: "NO_USER" });
+            dispatch(showNotification("Nu există utilizator cu această adresă de mail !", NotificationType.ERROR))
             break;
 
           case "PASS_INCORECT":
             setPassMistakes((oldVal) => oldVal + 1);
-            dispatchNotification({ type: "INVALID_PASS" });
+            dispatch(showNotification("Parola este incorectă !", NotificationType.ERROR))
             break;
-
+            
           default:
-            dispatchNotification({ type: "SERVER_ERR" });
+            dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
             break;
         }
       })
       .catch(() => {
-        dispatchNotification({ type: "SERVER_ERR" });
+        dispatch(hideLoading());
+        dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
       });
   }
 
   return (
     <>
       {pageTarget && <LinkTansition to={pageTarget} transitNow={true} />}
-      {notification.isShown && (
-        <Notification
-          message={notification.message}
-          type={notification.notificationType}
-          deleteNotification={() =>
-            dispatchNotification({ type: "DEACTIVATE" })
-          }
-        />
-      )}
-
       <section className="section-gradient section-header u_padding_down--big">
         <div className="flex-row--centered">
           <div className="box-mountain-bg">
@@ -144,14 +98,10 @@ export default function Login() {
                 </div>
 
                 <div className="form__group">
-                  <input
-                    type="email"
-                    className="form__input"
-                    placeholder="Adresă de email *"
-                    id="email"
-                    name="email"
-                    ref={email}
-                    required
+                  <input type="email" id="email" name="email" required
+                    className="form__input" placeholder="Adresă de email *"
+                    value={emailUsed}
+                    onChange={(input)=>setEmailUsed(input.target.value)}
                   />
                   <label
                     htmlFor="email"
@@ -162,14 +112,11 @@ export default function Login() {
                 </div>
 
                 <div className="form__group u-margin-bottom-intermediate">
-                  <input
-                    type="password"
-                    className="form__input"
-                    placeholder="Parolă *"
-                    id="password"
-                    name="password"
-                    ref={password}
-                    required
+                  <input id="password" name="password"
+                    type={displayPass ? "text":"password"} className="form__input"
+                    placeholder="Parolă *" required
+                    value={passwordUsed}
+                    onChange={(input)=>setPasswordUsed(input.target.value)}
                   />
                   <label
                     htmlFor="password"
@@ -177,10 +124,22 @@ export default function Login() {
                   >
                     Parolă
                   </label>
+
+                  <div className="form__group form__group__checkbox">
+                    <label htmlFor="pass_toggle" className="form__label">
+                      Arată parola
+                    </label>
+                    <input
+                      type="checkbox" name="pass_toggle" id="pass_toggle"
+                      className="form__checkbox"
+                      checked={displayPass}
+                      onClick={()=>setDisplayPass((oldStatus) => !oldStatus)}
+                    />
+                  </div>
                 </div>
 
                 <div className="form__group">
-                  <button className="btn btn--white">
+                  <button className="btn btn--white" disabled={isLoadingSignShown || isNotificationShwon}>
                     Intră in cont <i className="fas fa-sign-in-alt"></i>
                   </button>
                 </div>

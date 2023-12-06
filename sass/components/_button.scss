@@ -47,6 +47,14 @@
     transition: all 0.4s;
   }
 
+  &:disabled{
+    cursor: default;
+    opacity: .7;
+    transform:none;
+    box-shadow: none;
+    &::after{display: none;}
+  }
+
   &--white {
     @include btn-color(#777, aliceblue);
   }
