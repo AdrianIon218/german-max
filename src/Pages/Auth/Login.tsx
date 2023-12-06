@@ -99,11 +99,7 @@ export default function Login() {
 
   return (
     <>
-      {pageTarget && (
-        <LinkTansition to={pageTarget} transitNow={true}>
-          {" "}
-        </LinkTansition>
-      )}
+      {pageTarget && <LinkTansition to={pageTarget} transitNow={true} />}
       {notification.isShown && (
         <Notification
           message={notification.message}

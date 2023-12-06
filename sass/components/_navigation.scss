@@ -166,3 +166,20 @@
     }
   }
 }
+
+body:has(.navigation__background--open){
+  overflow: hidden;
+}
+
+body:not(:has(.navigation__background--open)){
+  @include mixin_animation(overflow-delay, .1s, ease-in, .15s);
+}
+
+@keyframes overflow-delay {
+  from{
+    overflow: hidden;
+  }
+  to{
+    overflow: auto;
+  }
+}

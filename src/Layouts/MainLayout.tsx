@@ -6,10 +6,10 @@ import TransitionContext from "../Contexts/TransitionContext";
 import Footer from "./Footer";
 import MainMenu from "./MainMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../main";
 import Notification from "../Common/Notfication";
 import { hideNotification } from "../SliceReducers/NotificationSlice";
 import LoadingSpinner from "../Common/LoadingSpinner";
+import { RootState } from "../SliceReducers/store";
 
 export default function MainLayout() {
   const {isShown:isNotificationShwon, message:notificationMessage, type:notificationType} = useSelector((store:RootState) => store.notification);
