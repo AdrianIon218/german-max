@@ -1,8 +1,13 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import RadioButton from "../../Common/RadioButton";
 import LinkTansition from "../../Common/LinkTransition";
 import axios from "axios";
-import Notification, { NotificationType } from "../../Common/Notfication";
+import { useDispatch, useSelector } from "react-redux";
+import { showNotification } from "../../SliceReducers/NotificationSlice";
+import { NotificationType } from "../../Common/Notfication";
+import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
+import { RootState } from "../../SliceReducers/store";
+import { startTransition } from "../../SliceReducers/TransitionSlice";
 
 enum KnowlegdeLevel {
   BEGGINER,
@@ -15,71 +20,52 @@ export default function RegisterForm({
 }: {
   location: "home" | "register";
 }) {
+  const [emailUsed, setEmailUsed] = useState("");
+  const [name, setName] = useState("");
+  const [passwordUsed, setPasswordUsed] = useState("");
+  const [showPass, setShowPass] = useState(false);
   const [level, setLevel] = useState(KnowlegdeLevel.BEGGINER);
-  const [warningNotification, setNotification] = useState(false);
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passRef = useRef<HTMLInputElement>(null);
-  const [pageTarget, setPage] = useState("");
+
+  const dispatch = useDispatch();
+  const isNotificationShwon = useSelector((store:RootState) => store.notification.isShown);
+  const isLoadingSignShown = useSelector((store:RootState) => store.loading.isLoading);
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const emailEntered = emailRef.current!.value;
-    const currentLevel =
-      level === KnowlegdeLevel.ADVANCED
-        ? "C1"
-        : level === KnowlegdeLevel.BEGGINER
-        ? "A1"
-        : "B1";
+    dispatch(showLoading());
+    const currentLevel = ["A1","B1","C1"][level];
+
     axios
-      .post("http://localhost:5000/signup/checkEmail", { email: emailEntered })
+      .post("http://localhost:5000/signup/checkEmail", { email: emailUsed })
       .then((response) => {
         const { isEmailAvailable } = response.data;
 
         if (isEmailAvailable) {
-          const username = usernameRef.current!.value;
-          const password = passRef.current!.value;
-
           return axios.post("http://localhost:5000/signup/addNewUser", {
-            email: emailEntered,
-            name: username,
-            password: password,
+            email: emailUsed,
+            name,
+            password: passwordUsed,
             level: currentLevel,
           });
         } else {
-          setNotification(true);
+          dispatch(hideLoading());
+          dispatch(showNotification("Adresa de mail este deja folosită !", NotificationType.WARNING))
         }
       })
       .then((resAddUser) => {
         if (resAddUser?.data.isUserAdded) {
-          localStorage.setItem("userAccount", emailEntered);
-          setPage(`/course-plan/${currentLevel}`);
+          localStorage.setItem("userAccount", emailUsed);
+          dispatch(hideLoading());
+          dispatch(startTransition(`/course-plan/${currentLevel}`));
         }
+      })
+      .catch(()=>{
+        dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
       });
-  }
-
-  function togglePassVisibility() {
-    if (passRef.current!.type === "password") {
-      passRef.current!.type = "text";
-    } else {
-      passRef.current!.type = "password";
-    }
   }
 
   return (
     <>
-      {warningNotification && (
-        <Notification
-          message="Adresa de mail este deja folosită !"
-          type={NotificationType.WARNING}
-          deleteNotification={() => setNotification(false)}
-        />
-      )}
-      {pageTarget && (
-        <LinkTansition to={pageTarget} transitNow={true}>
-          {" "}
-        </LinkTansition>
-      )}
       <section
         className={
           location === "home"
@@ -105,12 +91,11 @@ export default function RegisterForm({
                 </div>
 
                 <div className="form__group">
-                  <input
-                    type="text"
+                  <input type="text" id="name"
                     className="form__input"
                     placeholder="Nume complet *"
-                    id="name"
-                    ref={usernameRef}
+                    value={name}
+                    onChange={(input)=>setName(input.target.value)}
                     required
                   />
                   <label
@@ -123,11 +108,10 @@ export default function RegisterForm({
 
                 <div className="form__group">
                   <input
-                    type="email"
-                    className="form__input"
-                    placeholder="Adresă de email *"
-                    id="email"
-                    ref={emailRef}
+                    type="email" id="email"
+                    className="form__input" placeholder="Adresă de email *"
+                    value={emailUsed}
+                    onChange={(input)=>setEmailUsed(input.target.value)}
                     required
                   />
                   <label
@@ -140,13 +124,11 @@ export default function RegisterForm({
 
                 <div className="form__group">
                   <input
-                    type="password"
-                    minLength={6}
-                    maxLength={50}
+                    type={showPass? "text":"password"} id="password"
+                    minLength={6} maxLength={50}
                     className="form__input"
                     placeholder="Parolă de minim 6 caractere *"
-                    id="password"
-                    ref={passRef}
+                    value={passwordUsed} onChange={(input)=>setPasswordUsed(input.target.value)}
                     required
                   />
                   <label
@@ -163,7 +145,7 @@ export default function RegisterForm({
                     <input
                       type="checkbox"
                       className="form__checkbox"
-                      onClick={togglePassVisibility}
+                      onClick={()=> setShowPass(oldState => !oldState)}
                       name="pass_toggle"
                       id="pass_toggle"
                     />
@@ -203,7 +185,7 @@ export default function RegisterForm({
                 </div>
 
                 <div className="form__group">
-                  <button className="btn btn--white">
+                  <button className="btn btn--white" disabled={isLoadingSignShown || isNotificationShwon}>
                     Continuă <i className="fas fa-angle-right"></i>
                   </button>
                 </div>

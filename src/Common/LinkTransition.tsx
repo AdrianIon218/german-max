@@ -8,6 +8,7 @@ interface IProps {
   children?: any;
   className?: string;
   transitNow?: boolean;
+  onClose?:()=>void
 }
 
 function LinkTansition(props: IProps) {
@@ -22,6 +23,7 @@ function LinkTansition(props: IProps) {
 
     setTimeout(() => {
       navigate(props.to);
+      props?.onClose?.();
     }, 400);
   };
 

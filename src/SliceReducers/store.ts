@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import notificationReducer from './NotificationSlice.ts';
 import loadingReducer from "./LoadingSlice.ts";
+import TransitionReducer from './TransitionSlice.ts';
 
 const store = configureStore({
     reducer:{
       notification: notificationReducer,
-      loading: loadingReducer
+      loading: loadingReducer,
+      pageTransition: TransitionReducer
     }
 });
   

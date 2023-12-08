@@ -6,12 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import { RootState } from "../../SliceReducers/store";
+import { startTransition } from "../../SliceReducers/TransitionSlice";
 
 export default function Login() {
   const [passwordUsed, setPasswordUsed] = useState("");
   const [emailUsed, setEmailUsed] = useState("");
   const [passNumMistakes, setPassMistakes] = useState(0);
-  const [pageTarget, setPage] = useState("");
   const [displayPass, setDisplayPass] = useState(false);
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export default function Login() {
             setEmailUsed("");
             const { lastLevel } = response.data;
             localStorage.setItem("userAccount", emailUsed);
-            setPage(`/course-plan/${lastLevel}`);
+            dispatch(startTransition(`/course-plan/${lastLevel}`));
             break;
 
           case "NO_USER":
@@ -63,7 +63,6 @@ export default function Login() {
 
   return (
     <>
-      {pageTarget && <LinkTansition to={pageTarget} transitNow={true} />}
       <section className="section-gradient section-header u_padding_down--big">
         <div className="flex-row--centered">
           <div className="box-mountain-bg">
