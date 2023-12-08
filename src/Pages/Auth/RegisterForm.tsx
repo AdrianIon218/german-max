@@ -60,6 +60,7 @@ export default function RegisterForm({
         }
       })
       .catch(()=>{
+        dispatch(hideLoading());
         dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
       });
   }
