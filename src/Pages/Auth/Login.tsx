@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import LinkTansition from "../../Common/LinkTransition";
 import axios from "axios";
 import { NotificationType } from "../../Common/Notfication";
@@ -7,12 +7,13 @@ import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import { RootState } from "../../SliceReducers/store";
 import { startTransition } from "../../SliceReducers/TransitionSlice";
+import Password, { PassRef } from "../../Common/Password";
 
 export default function Login() {
   const [passwordUsed, setPasswordUsed] = useState("");
   const [emailUsed, setEmailUsed] = useState("");
   const [passNumMistakes, setPassMistakes] = useState(0);
-  const [displayPass, setDisplayPass] = useState(false);
+  const passDisplay = useRef<PassRef>(null);
 
   const dispatch = useDispatch();
   const isNotificationShwon = useSelector((store:RootState) => store.notification.isShown);
@@ -31,7 +32,7 @@ export default function Login() {
         const { status } = response.data;
         dispatch(hideLoading());
         setPasswordUsed("");
-        setDisplayPass(false);
+        passDisplay.current!.deactivateShowPass();
 
         switch (status) {
           case "USER_OK":
@@ -109,34 +110,7 @@ export default function Login() {
                     Adresă de email
                   </label>
                 </div>
-
-                <div className="form__group u-margin-bottom-intermediate">
-                  <input id="password" name="password"
-                    type={displayPass ? "text":"password"} className="form__input"
-                    placeholder="Parolă *" required
-                    value={passwordUsed}
-                    onChange={(input)=>setPasswordUsed(input.target.value)}
-                  />
-                  <label
-                    htmlFor="password"
-                    className="form__label form__label__required"
-                  >
-                    Parolă
-                  </label>
-
-                  <div className="form__group form__group__checkbox">
-                    <label htmlFor="pass_toggle" className="form__label">
-                      Arată parola
-                    </label>
-                    <input
-                      type="checkbox" name="pass_toggle" id="pass_toggle"
-                      className="form__checkbox"
-                      checked={displayPass}
-                      onClick={()=>setDisplayPass((oldStatus) => !oldStatus)}
-                    />
-                  </div>
-                </div>
-
+                <Password password={passwordUsed} onChange={(str:string)=>setPasswordUsed(str)} ref={passDisplay} />
                 <div className="form__group">
                   <button className="btn btn--white" disabled={isLoadingSignShown || isNotificationShwon}>
                     Intră in cont <i className="fas fa-sign-in-alt"></i>

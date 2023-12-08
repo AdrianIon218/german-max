@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import RadioButton from "../../Common/RadioButton";
 import LinkTansition from "../../Common/LinkTransition";
 import axios from "axios";
@@ -8,12 +8,19 @@ import { NotificationType } from "../../Common/Notfication";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import { RootState } from "../../SliceReducers/store";
 import { startTransition } from "../../SliceReducers/TransitionSlice";
+import Password from "../../Common/Password";
 
 enum KnowlegdeLevel {
   BEGGINER,
   INTERMEDIATE,
   ADVANCED,
 }
+
+const levelsRadioBtn = [
+  { id:"beginner", value:KnowlegdeLevel.BEGGINER, label:"Începător  (A1-A2)" },
+  { id:"intermediate", value:KnowlegdeLevel.INTERMEDIATE, label:"Intermediar  (B1-B2)" },
+  { id:"advanced", value:KnowlegdeLevel.ADVANCED, label:"Avansat  (C1-C2)" },
+]
 
 export default function RegisterForm({
   location,
@@ -23,8 +30,9 @@ export default function RegisterForm({
   const [emailUsed, setEmailUsed] = useState("");
   const [name, setName] = useState("");
   const [passwordUsed, setPasswordUsed] = useState("");
-  const [showPass, setShowPass] = useState(false);
   const [level, setLevel] = useState(KnowlegdeLevel.BEGGINER);
+  const currentLevel = ["A1","B1","C1"][level];
+  const radioBtnsKey = useId();
 
   const dispatch = useDispatch();
   const isNotificationShwon = useSelector((store:RootState) => store.notification.isShown);
@@ -32,8 +40,7 @@ export default function RegisterForm({
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    dispatch(showLoading());
-    const currentLevel = ["A1","B1","C1"][level];
+    dispatch(showLoading());  
 
     axios
       .post("http://localhost:5000/signup/checkEmail", { email: emailUsed })
@@ -123,66 +130,21 @@ export default function RegisterForm({
                   </label>
                 </div>
 
-                <div className="form__group">
-                  <input
-                    type={showPass? "text":"password"} id="password"
-                    minLength={6} maxLength={50}
-                    className="form__input"
-                    placeholder="Parolă de minim 6 caractere *"
-                    value={passwordUsed} onChange={(input)=>setPasswordUsed(input.target.value)}
-                    required
-                  />
-                  <label
-                    htmlFor="password"
-                    className="form__label form__label__required"
-                  >
-                    Parolă
-                  </label>
-
-                  <div className="form__group form__group__checkbox">
-                    <label htmlFor="pass_toggle" className="form__label">
-                      Arată parola
-                    </label>
-                    <input
-                      type="checkbox"
-                      className="form__checkbox"
-                      onClick={()=> setShowPass(oldState => !oldState)}
-                      name="pass_toggle"
-                      id="pass_toggle"
-                    />
-                  </div>
-                </div>
+                <Password password={passwordUsed} onChange={(str:string)=>setPasswordUsed(str)} />
 
                 <div className="form__group u-margin-bottom-intermediate">
                   <h3 className="form__sub-heading">
                     Care este nivelul tău de germană ?
                   </h3>
-                  <RadioButton
-                    id="beginner"
-                    name="level"
-                    value={KnowlegdeLevel.BEGGINER}
-                    change={() => setLevel(KnowlegdeLevel.BEGGINER)}
-                    label="Începător  (A1-A2)"
-                    validate={() => level === KnowlegdeLevel.BEGGINER}
-                  />
-
-                  <RadioButton
-                    id="intermediate"
-                    name="level"
-                    value={KnowlegdeLevel.INTERMEDIATE}
-                    change={() => setLevel(KnowlegdeLevel.INTERMEDIATE)}
-                    label="Intermediar  (B1-B2)"
-                    validate={() => level === KnowlegdeLevel.INTERMEDIATE}
-                  />
-
-                  <RadioButton
-                    id="advanced"
-                    name="level"
-                    value={KnowlegdeLevel.ADVANCED}
-                    change={() => setLevel(KnowlegdeLevel.ADVANCED)}
-                    label="Avansat  (C1-C2)"
-                    validate={() => level === KnowlegdeLevel.ADVANCED}
-                  />
+                  {
+                   levelsRadioBtn.map((item, index) => (
+                     <RadioButton key={`${radioBtnsKey}-${index}`}
+                       id={item.id} name="level" 
+                       value={item.value} 
+                       change={()=>setLevel(item.value)} 
+                       label={item.label} 
+                       validate={()=> level === item.value} />))
+                  }
                 </div>
 
                 <div className="form__group">
@@ -194,7 +156,7 @@ export default function RegisterForm({
             </div>
           </div>
         </div>
-      </section>{" "}
+      </section>
     </>
   );
 }
