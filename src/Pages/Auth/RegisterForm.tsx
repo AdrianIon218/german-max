@@ -43,12 +43,12 @@ export default function RegisterForm({
     dispatch(showLoading());  
 
     axios
-      .post("http://localhost:5000/signup/checkEmail", { email: emailUsed })
+      .post("https://german-max-server.onrender.com/signup/checkEmail", { email: emailUsed })
       .then((response) => {
         const { isEmailAvailable } = response.data;
 
         if (isEmailAvailable) {
-          return axios.post("http://localhost:5000/signup/addNewUser", {
+          return axios.post("https://german-max-server.onrender.com/signup/addNewUser", {
             email: emailUsed,
             name,
             password: passwordUsed,

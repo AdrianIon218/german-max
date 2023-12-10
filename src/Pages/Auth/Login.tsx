@@ -24,7 +24,7 @@ export default function Login() {
     dispatch(showLoading());
 
     axios
-      .post("http://localhost:5000/login/", {
+      .post("https://german-max-server.onrender.com/login/", {
         email: emailUsed,
         password: passwordUsed,
       })

@@ -10,6 +10,7 @@ const Login = lazy(() => import("./Pages/Auth/Login"));
 const RegisterForm = lazy(() => import("./Pages/Auth/RegisterForm"));
 const Support = lazy(() => import("./Pages/Other/Support"));
 const NoPage = lazy(() => import("./Pages/Other/NoPage"));
+const CoursesPage = lazy(() => import("./Pages/Home/CoursesSection"))
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path:"/contacts",
         element: <Support />,
         loader: supportLoader
+      },
+      { 
+        path:"/courses",
+        element: <CoursesPage location="own-page" />
       }]
   }]);
 

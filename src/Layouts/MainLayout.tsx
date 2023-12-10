@@ -16,7 +16,7 @@ import { stopTransition } from "../SliceReducers/TransitionSlice";
 export default function MainLayout() {
   const {isShown:isNotificationShwon, message:notificationMessage, type:notificationType} = useSelector((store:RootState) => store.notification);
   const {isLoading} = useSelector((store:RootState) => store.loading);
-  const pageTransition = useSelector((store:RootState) => store.pageTransition)
+  const pageTransition = useSelector((store:RootState) => store.pageTransition);
   const dispatch = useDispatch();
   
   return (
