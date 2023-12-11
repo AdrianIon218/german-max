@@ -8,7 +8,6 @@
   &__side {
     color: $color-white-max;
     font-size: 1.2rem;
-
     height: 100%;
     width: 100%;
     padding: 1rem;
@@ -187,87 +186,88 @@
     margin-top: auto;
   }
 
-  // *************************
   @include respond(tab-port) {
-    height: auto;
-
-    &__picture {
-      height: 45%;
-    }
-
-    &__side {
+    @include touchScreenState(true) {
       height: auto;
-      width: 100%;
-      position: relative;
-
-      &--front {
-        height: 34rem;
+  
+      &__picture {
+        height: 45%;
       }
-
-      &--back {
-        $local-poligon: polygon(
-          0% 0%,
-          12.5% 5%,
-          25% 0%,
-          37.5% 5%,
-          50% 0%,
-          62.5% 5%,
-          75% 0%,
-          87.5% 5%,
-          100% 0%,
-          100% 100%,
-          0% 100%
-        );
-
-        min-height: 18rem;
-        border-top-left-radius: 0%;
-        border-top-right-radius: 0%;
-        -webkit-clip-path: $local-poligon;
-        clip-path: $local-poligon;
+  
+      &__side {
+        height: auto;
+        width: 100%;
+        position: relative;
+  
+        &--front {
+          height: 34rem;
+        }
+  
+        &--back {
+          $local-poligon: polygon(
+            0% 0%,
+            12.5% 5%,
+            25% 0%,
+            37.5% 5%,
+            50% 0%,
+            62.5% 5%,
+            75% 0%,
+            87.5% 5%,
+            100% 0%,
+            100% 100%,
+            0% 100%
+          );
+  
+          min-height: 18rem;
+          border-top-left-radius: 0%;
+          border-top-right-radius: 0%;
+          -webkit-clip-path: $local-poligon;
+          clip-path: $local-poligon;
+          transform: rotateY(0) translateY(-25%);
+        }
+      }
+  
+      &:hover &__side--front {
+        transform: rotateY(0);
+      }
+  
+      &:hover &__side--back {
         transform: rotateY(0) translateY(-25%);
       }
-    }
-
-    &:hover &__side--front {
-      transform: rotateY(0);
-    }
-
-    &:hover &__side--back {
-      transform: rotateY(0) translateY(-25%);
-    }
-
-    &__heading {
-      width: auto;
-      right: 50%;
-      transform: translateX(50%);
-
-      &__span {
-        &--1 {
-          background-image: linear-gradient(
-            to right bottom,
-            rgba(lighten($color-orange-1, 10%), 0.85),
-            rgba(darken($color-orange-1, 15%), 0.85)
-          );
-        }
-
-        &--3 {
-          background-image: linear-gradient(
-            to right bottom,
-            rgba($color-green-1, 0.85),
-            rgba(lighten($color-green-3, 10%), 0.85)
-          );
+  
+      &__heading {
+        width: auto;
+        right: 50%;
+        transform: translateX(50%);
+  
+        &__span {
+          &--1 {
+            background-image: linear-gradient(
+              to right bottom,
+              rgba(lighten($color-orange-1, 10%), 0.85),
+              rgba(darken($color-orange-1, 15%), 0.85)
+            );
+          }
+  
+          &--3 {
+            background-image: linear-gradient(
+              to right bottom,
+              rgba($color-green-1, 0.85),
+              rgba(lighten($color-green-3, 10%), 0.85)
+            );
+          }
         }
       }
-    }
-
-    &__back-content {
-      padding: 1rem 0;
-      justify-content: space-between;
-    }
-
-    &__time-estimation {
-      margin-top: 0px;
-    }
+  
+      &__back-content {
+        padding: 1rem 0;
+        justify-content: space-between;
+      }
+  
+      &__time-estimation {
+        margin-top: 0px;
+      }
+    }  
   }
 }
 

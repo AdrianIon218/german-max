@@ -47,11 +47,6 @@
 }
 
 body:has(.blackdrop) {
-  &::-webkit-scrollbar {
-    border-radius: 0px;
-    background-color: lighten($color-black, 10%);
-    &-thumb {
-      box-shadow: inset 0px 0px 20px 1px lighten($color-black, 20%);
-    }
-  }
+  padding-right: 1.9rem;
+  overflow: hidden !important;
 }
