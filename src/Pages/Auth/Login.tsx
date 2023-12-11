@@ -63,7 +63,6 @@ export default function Login() {
   }
 
   return (
-    <>
       <section className="section-gradient section-header u_padding_down--big">
         <div className="flex-row--centered">
           <div className="box-mountain-bg">
@@ -121,6 +120,5 @@ export default function Login() {
           </div>
         </div>
       </section>
-    </>
   );
 }
