@@ -186,7 +186,7 @@
     margin-top: auto;
   }
 
-  @include touchScreenState(true) {
+  @include respond(phone) {
       height: auto;
   
       &__picture {
