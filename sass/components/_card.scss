@@ -186,8 +186,7 @@
     margin-top: auto;
   }
 
-  @include respond(tab-port) {
-    @include touchScreenState(true) {
+  @include touchScreenState(true) {
       height: auto;
   
       &__picture {
@@ -267,7 +266,7 @@
       &__time-estimation {
         margin-top: 0px;
       }
-    }  
+      
   }
 }
 

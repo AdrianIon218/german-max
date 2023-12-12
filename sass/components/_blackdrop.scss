@@ -47,6 +47,8 @@
 }
 
 body:has(.blackdrop) {
-  padding-right: 1.9rem;
-  overflow: hidden !important;
+  @include touchScreenState(false) {
+    padding-right: 1.9rem;
+    overflow: hidden !important;
+  }
 }

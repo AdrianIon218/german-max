@@ -168,8 +168,10 @@
 }
 
 body:has(.navigation__background--open){
-  padding-right: 1.9rem;
-  overflow: hidden;
+  @include touchScreenState(false) {
+    padding-right: 1.9rem;
+    overflow: hidden;
+  }
 }
 
 body:not(:has(.navigation__background--open)){
