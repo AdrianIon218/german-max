@@ -3,7 +3,7 @@ import MainLayout from "./Layouts/MainLayout";
 import { lazy } from "react";
 
 import { loader as mainPageLoader } from "./Pages/Home/MainPage";
-import { loader as supportLoader } from "./Pages/Other/Support";
+import { supportAction, loader as supportLoader } from "./Pages/Other/Support";
 
 const MainPage = lazy(() => import("./Pages/Home/MainPage"));
 const Login = lazy(() => import("./Pages/Auth/Login"));
@@ -32,9 +32,10 @@ const router = createBrowserRouter([
         element: <RegisterForm location="register" />
       },
       {
-        path:"/contacts",
+        path:"/support",
         element: <Support />,
-        loader: supportLoader
+        loader: supportLoader,
+        action: supportAction
       },
       { 
         path:"/courses",
