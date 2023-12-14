@@ -166,15 +166,18 @@
     }
   }
 }
-
-body:has(.navigation__background--open){
-  @include touchScreenState(false) {
+@include touchScreenState(false) {
+  body:has(.navigation__background--open){
     padding-right: 1.9rem;
+    overflow: hidden;
+  }
+
+  html:has(.navigation__background--open){
     overflow: hidden;
   }
 }
 
-body:not(:has(.navigation__background--open)){
+html:not(:has(.navigation__background--open)), body:not(:has(.navigation__background--open)){
   @include mixin_animation(show-overflow-delay, .1s, ease-in, .15s);
 }
 
