@@ -87,7 +87,7 @@ export async function supportAction({request}: {request: Request}){
   const data = await request.formData();
   const {email, topic, userFromStorage, message} = Object.fromEntries(data);
   try{
-    const response = await axios.post("https://localhost:5000/contacts", {
+    const response = await axios.post("https://german-max-server.onrender.com/contacts/", {
         email: userFromStorage || email,
         topic: topic,
         message: message,
