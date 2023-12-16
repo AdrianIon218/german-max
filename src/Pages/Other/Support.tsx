@@ -2,10 +2,10 @@ import axios from "axios";
 import { useEffect, useRef } from "react";
 import { NotificationType } from "../../Common/Notfication";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
-import store from "../../SliceReducers/store";
+import store, { RootState } from "../../SliceReducers/store";
 
 function Support() {
   const userFromStorage = useLoaderData() as string;
@@ -13,9 +13,11 @@ function Support() {
   const topicRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
+  const isNotificationShwon = useSelector((store:RootState) => store.notification.isShown);
+  const isLoadingSignShown = useSelector((store:RootState) => store.loading.isLoading);
   const actionData = useActionData() as {status:string, notificationType: NotificationType};
   useEffect(()=>{
-    if(actionData?.status && actionData?.status){
+    if(actionData?.status && actionData?.notificationType){
       topicRef.current!.value = "";
       messageRef.current!.value = "";
       dispatch(showNotification(actionData.status, actionData.notificationType));
@@ -71,7 +73,7 @@ function Support() {
         </div>
 
         <div className="form__group">
-          <button className="btn btn--white">Trimite mesajul</button>
+          <button className="btn btn--white" disabled={isLoadingSignShown || isNotificationShwon}>Trimite mesajul</button>
         </div>
       </Form>
     </section>
