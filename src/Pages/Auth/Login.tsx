@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import LinkTansition from "../../Common/LinkTransition";
-import axios from "axios";
 import { NotificationType } from "../../Common/Notfication";
 import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
@@ -8,6 +7,7 @@ import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import { RootState } from "../../SliceReducers/store";
 import { startTransition } from "../../SliceReducers/TransitionSlice";
 import Password, { PassRef } from "../../Common/Password";
+import { comparePasswords, selectUserByEmail } from "../../supabase/user_api";
 
 export default function Login() {
   const [passwordUsed, setPasswordUsed] = useState("");
@@ -23,43 +23,37 @@ export default function Login() {
     event.preventDefault();
     dispatch(showLoading());
 
-    axios
-      .post("https://german-max-server.onrender.com/login/", {
-        email: emailUsed,
-        password: passwordUsed,
-      })
-      .then((response) => {
-        const { status } = response.data;
-        dispatch(hideLoading());
-        setPasswordUsed("");
-        passDisplay.current!.deactivateShowPass();
-
-        switch (status) {
-          case "USER_OK":
-            setEmailUsed("");
-            const { lastLevel } = response.data;
-            localStorage.setItem("userAccount", emailUsed);
-            dispatch(startTransition(`/course-plan/${lastLevel}`));
-            break;
-
-          case "NO_USER":
-            dispatch(showNotification("Nu există utilizator cu această adresă de mail !", NotificationType.ERROR))
-            break;
-
-          case "PASS_INCORECT":
-            setPassMistakes((oldVal) => oldVal + 1);
-            dispatch(showNotification("Parola este incorectă !", NotificationType.ERROR))
-            break;
-            
-          default:
-            dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
-            break;
+    selectUserByEmail(emailUsed)
+    .then(async (users)=>{
+      const isEmailValid = users?.length! > 0;
+      dispatch(hideLoading());
+      setPasswordUsed("");
+      passDisplay.current!.deactivateShowPass();
+      
+      if(!isEmailValid){
+        dispatch(showNotification("Nu există utilizator cu această adresă de mail !", NotificationType.WARNING))
+      }
+      else
+      {
+        const hashedPass = users![0]!.password || "";
+        const isPassCorrect = await comparePasswords(passwordUsed, hashedPass);
+        if(isPassCorrect){
+          setEmailUsed("");
+          const lastLevel = users![0]!.lastLevel;
+          localStorage.setItem("userAccount", emailUsed);
+          dispatch(startTransition(`/course-plan/${lastLevel}`));
         }
-      })
-      .catch(() => {
-        dispatch(hideLoading());
-        dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
-      });
+        else
+        {
+          setPassMistakes((oldVal) => oldVal + 1);
+          dispatch(showNotification("Parola este incorectă !", NotificationType.ERROR))
+        }
+      }
+    })
+    .catch(() => {
+      dispatch(hideLoading());
+      dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
+    });
   }
 
   return (

@@ -1,7 +1,6 @@
 import { useId, useState } from "react";
 import RadioButton from "../../Common/RadioButton";
 import LinkTansition from "../../Common/LinkTransition";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { NotificationType } from "../../Common/Notfication";
@@ -9,6 +8,7 @@ import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import { RootState } from "../../SliceReducers/store";
 import { startTransition } from "../../SliceReducers/TransitionSlice";
 import Password from "../../Common/Password";
+import { selectUserByEmail, insertUser } from "../../supabase/user_api";
 
 enum KnowlegdeLevel {
   BEGGINER,
@@ -41,35 +41,30 @@ export default function RegisterForm({
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     dispatch(showLoading());  
-
-    axios
-      .post("https://german-max-server.onrender.com/signup/checkEmail", { email: emailUsed })
-      .then((response) => {
-        const { isEmailAvailable } = response.data;
-
-        if (isEmailAvailable) {
-          return axios.post("https://german-max-server.onrender.com/signup/addNewUser", {
-            email: emailUsed,
-            name,
-            password: passwordUsed,
-            level: currentLevel,
-          });
-        } else {
-          dispatch(hideLoading());
-          dispatch(showNotification("Adresa de mail este deja folosită !", NotificationType.WARNING))
-        }
-      })
-      .then((resAddUser) => {
-        if (resAddUser?.data.isUserAdded) {
+    
+    selectUserByEmail(emailUsed).then((users)=>{
+       const isEmailNotValid = users?.length! > 0;
+       if(isEmailNotValid){
+        dispatch(hideLoading());
+        dispatch(showNotification("Adresa de mail este deja folosită !", NotificationType.WARNING));
+       }else{
+        insertUser(emailUsed, passwordUsed, name, currentLevel)
+        .then((data) => {
+          console.log(data)
           localStorage.setItem("userAccount", emailUsed);
           dispatch(hideLoading());
           dispatch(startTransition(`/course-plan/${currentLevel}`));
-        }
-      })
-      .catch(()=>{
-        dispatch(hideLoading());
-        dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
-      });
+        })
+        .catch(()=>{
+          dispatch(hideLoading());
+          dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
+        })
+       }
+    })
+    .catch(()=>{
+      dispatch(hideLoading());
+      dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
+    })
   }
 
   return (
