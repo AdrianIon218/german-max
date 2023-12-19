@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useRef } from "react";
 import { NotificationType } from "../../Common/Notfication";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
@@ -6,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import store, { RootState } from "../../SliceReducers/store";
+import { insertMessage } from "../../supabase/contact_api";
 
 function Support() {
   const userFromStorage = useLoaderData() as string;
@@ -89,19 +89,10 @@ export async function supportAction({request}: {request: Request}){
   const data = await request.formData();
   const {email, topic, userFromStorage, message} = Object.fromEntries(data);
   try{
-    const response = await axios.post("https://german-max-server.onrender.com/contacts/", {
-        email: userFromStorage || email,
-        topic: topic,
-        message: message,
-      });
-
-    const { status } = response.data;
+    const currentEmail = userFromStorage || email;
+    await insertMessage(currentEmail.toString(), topic.toString(), message.toString());
     store.dispatch(hideLoading());
-    if (status === "sent") {
-      return {status: "Mesaj trimis !", notificationType: NotificationType.SUCCESS};
-    } else {
-      return {status: "Eroare, încercați mai târziu !", notificationType: NotificationType.ERROR};
-    }
+    return {status: "Mesaj trimis !", notificationType: NotificationType.SUCCESS};
   } catch {
       store.dispatch(hideLoading());
       return {status: "Eroare, încercați mai târziu !", notificationType: NotificationType.ERROR};
