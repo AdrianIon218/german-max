@@ -63,6 +63,10 @@
   &--between {
     padding: 27rem $padding-LR-section 23rem;
     margin-top: -17rem;
+
+    &:has(~.section-sign-up){
+      padding-bottom: 27rem;
+    }
   }
 }
 
