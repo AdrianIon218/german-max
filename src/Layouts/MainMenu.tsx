@@ -34,7 +34,7 @@ const MainMenu = () => {
           <Link
             to={item.to}
             className="navigation__link"
-            onClick={() => linkClick(item.btn)}
+            onClick={() => {linkClick(item.btn)}}
           >
             <i className={item.icon} /> {item.btn}
           </Link>
