@@ -2,7 +2,7 @@ const levelsDetails = [
   {
     title: "A1 - Începător",
     description:
-      "O persoană ce a terminat nivelul A1 va putea folosi expresii uzuale, să înțeleagă și să alcătuiască propoziții simple, să se poată prezenta altor persoane și să formuleze întrebări esențiale .",
+      "O persoană ce a terminat nivelul A1 va putea folosi expresii uzuale, să înțeleagă și să alcătuiască propoziții simple, să se poată prezenta altor persoane și să formuleze întrebări esențiale.",
   },
   {
     title: "A2 - Cunoștințe de bază",
@@ -12,7 +12,7 @@ const levelsDetails = [
   {
     title: "B1 - Cunostințe medii de limbă",
     description:
-      "O persoană ce a terminat nivelul B1 se va putea descurca în aproape toate situațiile de limbaj standardizat întâlnite într-o călătorie, să vorbească despre lucruri obișnuite de la servici, școală, timp liber, etc. În plus va putea să vorbească simplu și coerent despre teme cunoscute și domenii de interes personal , cât și să poată povesti despre experiențele și întâmplările personale.",
+      "O persoană ce a terminat nivelul B1 se va putea descurca în aproape toate situațiile de limbaj standardizat întâlnite într-o călătorie, să vorbească despre lucruri obișnuite de la servici, școală, timp liber, etc. În plus va putea să vorbească simplu și coerent despre teme cunoscute și domenii de interes personal, cât și să poată povesti despre experiențele și întâmplările personale.",
   },
   {
     title: "B2 - Utilizarea limbii independent",
