@@ -82,11 +82,6 @@ h1 {
 .heading-tertiary {
   font-size: 1.4rem;
   font-weight: 700;
-
-  &--biger {
-    font-size: 1.7rem;
-    font-weight: 800;
-  }
 }
 
 .paragraph {
@@ -95,6 +90,7 @@ h1 {
     display: block;
     font-size: 1.4rem;
     font-weight: 800;
+    color:$color-blue-7;
   }
 
   &:not(:last-child) {

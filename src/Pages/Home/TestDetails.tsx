@@ -29,7 +29,7 @@ const levelsDetails = [
 export default function TestDetails() {
   return (
     <div className="panel">
-      <h2 className="heading-tertiary--biger u-center-text u-margin-bottom-intermediate">
+      <h2 className="heading-tertiary u-margin-bottom-intermediate">
         Nivelele de cunoaștere a limbii germane
       </h2>
       {levelsDetails.map((item, index) => {

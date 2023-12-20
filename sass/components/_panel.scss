@@ -2,11 +2,11 @@
   display: block;
   min-height: 10vh;
   max-height: 86vh;
-  border-radius: 6px;
+  border-radius: 1rem;
   padding: 2.3rem 0.7rem;
   overflow-y: auto;
   background-color: $color-blue-gray;
-  border: 6px double darken($color-gray, 30%);
+  border: 4px solid $color-blue-7;
 
 
   &::-webkit-scrollbar {
@@ -16,10 +16,16 @@
     background-color: transparent;
 
     &-thumb {
-       border: 3px $color-gray solid;
+      border: 2px $color-gray solid;
       border-radius: 10px;
       background-color: $color-blue-dark;
     }
   }
-  
+
+  .heading-tertiary{
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-align: center;
+    color: $color-blue-7;
+  }
 }
