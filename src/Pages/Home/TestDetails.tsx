@@ -36,7 +36,9 @@ export default function TestDetails() {
         return (
           <p className="paragraph" key={index}>
             <span className="paragraph__title">{item.title}</span>
+            <span className="paragraph__body">
             {item.description}
+            </span>
           </p>
         );
       })}
