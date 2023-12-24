@@ -5,6 +5,19 @@
   width: 18rem;
   height: 28rem;
 
+  
+  &__loading{
+    &--1{
+      --loading-skeleton: orange;
+    }
+    
+    &--3{
+      --loading-skeleton: green;
+    }
+
+    animation: skeleton-card .4s infinite linear;
+  }
+
   &__side {
     color: $color-white-max;
     font-size: 1.2rem;

@@ -55,6 +55,9 @@ $gradient-gray-white: radial-gradient(
   rgb(240, 237, 237) 100%
 );
 
+// card loading
+$color-loading-white: lighten(rgb(231, 228, 228), 1%);
+
 // animations
 $time-move-in-ani: 1.4s;
 $delay-move-in-ani: 0.3s;

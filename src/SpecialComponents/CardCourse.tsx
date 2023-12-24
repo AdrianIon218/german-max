@@ -23,7 +23,10 @@ interface IProps extends IPropsCardCourse{
 }
 
 export default function CardCourse(props: IProps) {
-  console.log(props.isLoading)
+  if(props.isLoading) return (<div className="card">
+    <div className={`card__side card__loading card__loading--${props.typeCard} `}></div>
+  </div>);
+
   return (
     <div className="card flex-element">
       <div className="card__side card__side--front">
