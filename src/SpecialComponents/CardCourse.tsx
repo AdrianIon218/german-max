@@ -18,7 +18,12 @@ export interface IPropsCardCourse {
   estimationWeeks: number;
 }
 
-export default function CardCourse(props: IPropsCardCourse) {
+interface IProps extends IPropsCardCourse{
+  isLoading?:boolean
+}
+
+export default function CardCourse(props: IProps) {
+  console.log(props.isLoading)
   return (
     <div className="card flex-element">
       <div className="card__side card__side--front">
