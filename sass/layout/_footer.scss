@@ -85,6 +85,14 @@
     }
   }
 
+  &__item:has(span.link-disabled):hover{
+    transform: translateY(0px);
+  }
+
+  span.link-disabled{
+    color:  $color-blue-2;
+    cursor: default;
+  }
   &__coryright {
     border-top: 2px solid $color-blue-darker;
     padding-top: 1rem;

@@ -1,17 +1,23 @@
 import imgLogo from "/GermanMax-logo.png";
 import LinkTansition from "../Common/LinkTransition";
+import { useLocation } from "react-router-dom";
 
 const footerNav = ["Suport", "Recenzi", "Termeni și condiți", "Sugesti"];
 
 export default function Footer() {
-  const footerNavElements = footerNav.map((item, index) => (
+  const currentPathname = useLocation().pathname.slice(1);
+  console.log(currentPathname)
+  const footerNavElements =footerNav.map((item, index) => (
     <li className="footer__item" key={index}>
+      {
+      currentPathname === item.toLowerCase() ? <span className="link-disabled">{item}</span>:
       <LinkTansition
-        to={`${item === "Suport" ? "/support" : "#"}`}
+        to={`${item === "Suport" ? "/suport" : "#"}`}
         className="footer__link"
       >
         {item}
       </LinkTansition>
+      }
     </li>
   ));
 

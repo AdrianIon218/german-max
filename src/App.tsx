@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         element: <RegisterForm location="register" />
       },
       {
-        path:"/support",
+        path:"/suport",
         element: <Support />,
         loader: supportLoader,
         action: supportAction
