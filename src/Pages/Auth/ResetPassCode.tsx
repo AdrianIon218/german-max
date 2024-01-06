@@ -1,19 +1,13 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CountDownTime from "../../Features/CountDownTime";
-import Notification, { NotificationType } from "../../Features/Notfication";
+//import CountDownTime from "../../Features/CountDownTime";
 
 function ResetPassCode() {
   const navigate = useNavigate();
   const [emailToReset, setEmailToReset] = useState<string>("");
-  const [expireCodeTime, setExpireCodeTime] = useState("");
+  const [_, setExpireCodeTime] = useState("");
   const [isCodeExpired, setCodeExpire] = useState(false);
-  const [notification, setNotification] = useState({
-    isShown: false,
-    messsage: "",
-    type: NotificationType.NO_TYPE,
-  });
   const codeRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -65,45 +59,37 @@ function ResetPassCode() {
             navigate("/password_reset/new_password");
           } else {
             if (status) {
+              /*
               setNotification({
                 isShown: true,
                 messsage: "Codul este incorect !",
                 type: NotificationType.WARNING,
               });
+              */
             } else {
+              /*
               setNotification({
                 isShown: true,
                 messsage: "Eroare, încercați mai târziu !",
                 type: NotificationType.ERROR,
               });
+              */
             }
           }
         })
         .catch(() => {
+          /*
           setNotification({
             isShown: true,
             messsage: "Eroare, încercați mai târziu !",
             type: NotificationType.ERROR,
           });
+          */
         });
     }
   };
 
   return (
-    <>
-      {notification.isShown && (
-        <Notification
-          message={notification.messsage}
-          type={notification.type}
-          deleteNotification={() => {
-            setNotification({
-              isShown: false,
-              messsage: "",
-              type: NotificationType.NO_TYPE,
-            });
-          }}
-        />
-      )}
       <section className="section-gradient section-header u_padding_down--big">
         <div className="flex-row--centered">
           <div className="box-mountain-bg">
@@ -123,10 +109,12 @@ function ResetPassCode() {
                     hidden={isCodeExpired}
                   >
                     Codul expiră în &nbsp;
+                    {/*
                     <CountDownTime
                       time={expireCodeTime}
                       codeExpire={() => setCodeExpire(true)}
                     />
+                    */}
                   </p>
                 </div>
 
@@ -159,7 +147,6 @@ function ResetPassCode() {
           </div>
         </div>
       </section>
-    </>
   );
 }
 

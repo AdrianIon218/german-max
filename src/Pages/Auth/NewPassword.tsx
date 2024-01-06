@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Notification, { NotificationType } from "../../Features/Notfication";
 import axios from "axios";
 
 function NewPassword() {
   const navigate = useNavigate();
-  const [notification, setNotification] = useState({
-    isShown: false,
-    messsage: "",
-    type: NotificationType.NO_TYPE,
-  });
+  
   const [isPassSaved, setPassSaved] = useState(false);
   const passRef = useRef<HTMLInputElement>(null);
   const email = sessionStorage.getItem("emailToReset");
@@ -47,43 +42,35 @@ function NewPassword() {
           setPassSaved(true);
           sessionStorage.removeItem("emailToReset");
           sessionStorage.removeItem("allowToResetPass");
+          /*
           setNotification({
             isShown: true,
             messsage: "Parolă salvată!",
             type: NotificationType.SUCCESS,
           });
+          */
         } else {
+          /*
           setNotification({
             isShown: true,
             messsage: "Eroare, încercați mai târziu!",
             type: NotificationType.ERROR,
           });
+          */
         }
       })
       .catch(() => {
+        /*
         setNotification({
           isShown: true,
           messsage: "Eroare, încercați mai târziu!",
           type: NotificationType.ERROR,
         });
+        */
       });
   };
 
   return (
-    <>
-      {notification.isShown && (
-        <Notification
-          message={notification.messsage}
-          type={notification.type}
-          deleteNotification={() => {
-            setNotification({
-              isShown: false,
-              messsage: "",
-              type: NotificationType.NO_TYPE,
-            });
-          }}
-        />
-      )}
       <section className="section-gradient section-header u_padding_down--big">
         <div className="flex-row--centered">
           <div className="box-mountain-bg">
@@ -140,7 +127,6 @@ function NewPassword() {
           </div>
         </div>
       </section>
-    </>
   );
 }
 
