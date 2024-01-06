@@ -4,7 +4,7 @@ export interface PassRef{
     deactivateShowPass:()=>void
 }
 
-function Password({password, onChange}:{password:string, onChange:(str:string)=>void}, ref: Ref<PassRef>) {
+function Password({password, onChange, isDisabled}:{password:string, onChange:(str:string)=>void, isDisabled?:boolean}, ref: Ref<PassRef>) {
   const [displayPass, setDisplayPass] = useState(false);
 
   useImperativeHandle(ref, ()=>({
@@ -19,6 +19,7 @@ function Password({password, onChange}:{password:string, onChange:(str:string)=>
             value={password}
             onChange={(input) => onChange(input.target.value)}
             minLength={6} maxLength={50}
+            disabled={isDisabled}
       />
       <label htmlFor="password" className="form__label form__label__required">
         Parolă

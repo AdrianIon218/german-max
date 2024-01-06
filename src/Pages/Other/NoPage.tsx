@@ -1,9 +1,6 @@
-import Footer from "../../Layouts/Footer";
-import MainMenu from "../../Layouts/MainMenu";
 
 export default function NoPage() {
-  return (<>
-    <MainMenu />
+  return (
     <section className="section-video-bg section-header">
       <div className="message-not-found">
         <h2 className="heading-secondary u-center-text">
@@ -18,7 +15,5 @@ export default function NoPage() {
         />
       </video>
     </section>
-    <Footer />
-    </>
   );
 }

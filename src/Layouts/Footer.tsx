@@ -6,7 +6,6 @@ const footerNav = ["Suport", "Recenzi", "Termeni și condiți", "Sugesti"];
 
 export default function Footer() {
   const currentPathname = useLocation().pathname.slice(1);
-  console.log(currentPathname)
   const footerNavElements =footerNav.map((item, index) => (
     <li className="footer__item" key={index}>
       {

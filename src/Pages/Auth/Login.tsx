@@ -95,6 +95,7 @@ export default function Login() {
                     className="form__input" placeholder="Adresă de email *"
                     value={emailUsed}
                     onChange={(input)=>setEmailUsed(input.target.value)}
+                    disabled={isLoadingSignShown}
                   />
                   <label
                     htmlFor="email"
@@ -103,7 +104,10 @@ export default function Login() {
                     Adresă de email
                   </label>
                 </div>
-                <Password password={passwordUsed} onChange={(str:string)=>setPasswordUsed(str)} ref={passDisplay} />
+                <Password password={passwordUsed} 
+                  onChange={(str:string) => setPasswordUsed(str)} 
+                  ref={passDisplay} 
+                  isDisabled={isLoadingSignShown}/>
                 <div className="form__group">
                   <button className="btn btn--white" disabled={isLoadingSignShown || isNotificationShwon}>
                     Intră in cont <i className="fas fa-sign-in-alt"></i>
