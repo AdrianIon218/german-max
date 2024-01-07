@@ -1,6 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { navListLogedIn, navListNotLogedIn } from "../data/navLists";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../SliceReducers/store";
+import { hideNotification } from "../SliceReducers/NotificationSlice";
 
 interface ILocProps {
   btn: string;
@@ -11,6 +14,13 @@ interface ILocProps {
 const MainMenu = () => {
   const [showMenu, setShownMenu] = useState(false);
   const [menuList, setMenuList] = useState<ILocProps[]>(navListNotLogedIn);
+  const {isShown} = useSelector((store:RootState) => store.notification);
+  const isNotificationShwon = useRef<boolean>();
+  const dispath = useDispatch();
+
+  useEffect(()=>{
+   isNotificationShwon.current = isShown;
+  },[isShown]);
 
   const triggerMenu = () => {
     if (localStorage.getItem("userAccount")) {
@@ -20,6 +30,9 @@ const MainMenu = () => {
   };
 
   const linkClick = (btn: string) => {
+    if(isNotificationShwon.current){
+      dispath(hideNotification());
+    }
     triggerMenu();
     if (btn === "Deconectare") {
       localStorage.removeItem("userAccount");

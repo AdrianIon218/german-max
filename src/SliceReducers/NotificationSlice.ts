@@ -21,7 +21,7 @@ const notificationSlice = createSlice({
           state.isShown = true;
           state.message = action.payload.message;
           state.type = action.payload.type;
-    }
+        }
      },
       hideNotification(state){
         state.isShown = false;

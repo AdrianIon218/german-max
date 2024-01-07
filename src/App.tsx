@@ -10,7 +10,8 @@ const Login = lazy(() => import("./Pages/Auth/Login"));
 const RegisterForm = lazy(() => import("./Pages/Auth/RegisterForm"));
 const Support = lazy(() => import("./Pages/Other/Support"));
 const NoPage = lazy(() => import("./Pages/Other/NoPage"));
-const CoursesPage = lazy(() => import("./Pages/Home/CoursesSection"))
+const CoursesPage = lazy(() => import("./Pages/Home/CoursesSection"));
+const ResetPass = lazy(() => import("./Pages/Auth/ResetPass"));
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         children:[
           {
             index:true,
-            element:<p>Reset pass</p>,
+            element:<ResetPass />,
           },
           {
             path:"verify_password",
