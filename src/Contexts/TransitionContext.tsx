@@ -24,7 +24,7 @@ function TransitionContext(props: IPropsChildren) {
   );
 }
 
-export function useNotification(){
+export function useTransition(){
   return useContext(TransitionCtx);
 }
 

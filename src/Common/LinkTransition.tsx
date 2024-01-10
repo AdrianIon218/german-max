@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useNotification } from "../Contexts/TransitionContext";
+import { useTransition } from "../Contexts/TransitionContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../SliceReducers/store";
+import { hideNotification } from "../SliceReducers/NotificationSlice";
 
 interface IProps {
   to: string;
@@ -12,13 +15,24 @@ interface IProps {
 }
 
 function LinkTansition(props: IProps) {
-  const context = useNotification();
+  const context = useTransition();
+  const {isShown} = useSelector((store:RootState) => store.notification);
+  const isNotificationShwon = useRef<boolean>();
+  const dispath = useDispatch();
+
+  useEffect(()=>{
+   isNotificationShwon.current = isShown;
+  },[isShown]);
 
   const navigate = useNavigate();
   const transitionPlay = () => {
     context!.setTransition(true);
+
     setTimeout(() => {
       context!.setTransition(false);
+      if(isNotificationShwon.current){
+        dispath(hideNotification());
+      }
     }, 500);
 
     setTimeout(() => {
