@@ -5,6 +5,7 @@ interface IRadioBtnProps {
   label: string;
   change: () => void;
   validate: () => boolean;
+  disabled?: boolean;
 }
 
 export default function RadioButton(props: IRadioBtnProps) {
@@ -18,6 +19,7 @@ export default function RadioButton(props: IRadioBtnProps) {
         value={props.value}
         onChange={() => props.change()}
         checked={props.validate()}
+        disabled={props?.disabled}
       />
       <label htmlFor={props.id} className="form__radio-label">
         <span className="form__radio-button"></span>

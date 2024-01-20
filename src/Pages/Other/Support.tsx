@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import store, { RootState } from "../../SliceReducers/store";
-import { insertMessage } from "../../supabase/contact_api";
+import { insertMessage } from "../../Effects/contact_api";
 
 function Support() {
   const userFromStorage = useLoaderData() as string;

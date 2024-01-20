@@ -1,7 +1,7 @@
 import CardCourse from "../../SpecialComponents/CardCourse";
 import { useQuery } from "@tanstack/react-query";
 import { useId } from "react";
-import { getCoursesInfo } from "../../supabase/course_api";
+import { getCoursesInfo } from "../../Effects/course_api";
 import { AvailableCourses } from "../../data/availableCourses";
 
 export default function CoursesSection({

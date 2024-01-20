@@ -36,3 +36,16 @@ export const comparePasswords = async(unhashedPass:string, hashedPass:string)=>{
     }
     return false;
 }
+
+export const addExpiringCode = async (email:string, code:string, expire_at:string)=>{
+    const { data, error } = await supabase.from('expiring_code').insert([
+        { email, code, expire_at },
+       ]).select();
+
+    if(error){
+      console.error(error);
+      throw new Error("Could not insert the expiring_code!");
+    }
+
+    return data;
+}

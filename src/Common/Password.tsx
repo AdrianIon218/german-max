@@ -32,6 +32,7 @@ function Password({password, onChange, isDisabled}:{password:string, onChange:(s
           type="checkbox" name="pass_toggle" id="pass_toggle"
           className="form__checkbox"
           checked={displayPass}
+          disabled={isDisabled}
           onChange={()=>setDisplayPass((oldStatus) => !oldStatus)}
         />
       </div>

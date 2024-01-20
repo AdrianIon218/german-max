@@ -1,14 +1,14 @@
 import { useId, useState } from "react";
 import RadioButton from "../../Common/RadioButton";
 import LinkTansition from "../../Common/LinkTransition";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showNotification } from "../../SliceReducers/NotificationSlice";
 import { NotificationType } from "../../Common/Notfication";
 import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
-import { RootState } from "../../SliceReducers/store";
 import { startTransition } from "../../SliceReducers/TransitionSlice";
 import Password from "../../Common/Password";
-import { selectUserByEmail, insertUser } from "../../supabase/user_api";
+import { selectUserByEmail, insertUser } from "../../Effects/user_api";
+import { useIsLoadingOrNotifcationShown } from "../../SpecialComponents/CustomedHooks/ReduxHooks";
 
 enum KnowlegdeLevel {
   BEGGINER,
@@ -35,8 +35,7 @@ export default function RegisterForm({
   const radioBtnsKey = useId();
 
   const dispatch = useDispatch();
-  const isNotificationShwon = useSelector((store:RootState) => store.notification.isShown);
-  const isLoadingSignShown = useSelector((store:RootState) => store.loading.isLoading);
+  const disableForm = useIsLoadingOrNotifcationShown();
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,8 +48,7 @@ export default function RegisterForm({
         dispatch(showNotification("Adresa de mail este deja folosită !", NotificationType.WARNING));
        }else{
         insertUser(emailUsed, passwordUsed, name, currentLevel)
-        .then((data) => {
-          console.log(data)
+        .then(() => {
           localStorage.setItem("userAccount", emailUsed);
           dispatch(hideLoading());
           dispatch(startTransition(`/course-plan/${currentLevel}`));
@@ -100,6 +98,7 @@ export default function RegisterForm({
                     value={name}
                     onChange={(input)=>setName(input.target.value)}
                     required
+                    disabled={disableForm}
                   />
                   <label
                     htmlFor="name"
@@ -116,6 +115,7 @@ export default function RegisterForm({
                     value={emailUsed}
                     onChange={(input)=>setEmailUsed(input.target.value)}
                     required
+                    disabled={disableForm}
                   />
                   <label
                     htmlFor="email"
@@ -125,7 +125,7 @@ export default function RegisterForm({
                   </label>
                 </div>
 
-                <Password password={passwordUsed} onChange={(str:string)=>setPasswordUsed(str)} />
+                <Password password={passwordUsed} onChange={(str:string)=>setPasswordUsed(str)} isDisabled={disableForm} />
 
                 <div className="form__group u-margin-bottom-intermediate">
                   <h3 className="form__sub-heading">
@@ -138,12 +138,14 @@ export default function RegisterForm({
                        value={item.value} 
                        change={()=>setLevel(item.value)} 
                        label={item.label} 
-                       validate={()=> level === item.value} />))
+                       validate={()=> level === item.value}
+                       disabled={disableForm}
+                       />))
                   }
                 </div>
 
                 <div className="form__group">
-                  <button className="btn btn--white" disabled={isLoadingSignShown || isNotificationShwon}>
+                  <button className="btn btn--white" disabled={disableForm}>
                     Continuă <i className="fas fa-angle-right"></i>
                   </button>
                 </div>

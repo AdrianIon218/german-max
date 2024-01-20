@@ -7,7 +7,7 @@ import { hideLoading, showLoading } from "../../SliceReducers/LoadingSlice";
 import { RootState } from "../../SliceReducers/store";
 import { startTransition } from "../../SliceReducers/TransitionSlice";
 import Password, { PassRef } from "../../Common/Password";
-import { comparePasswords, selectUserByEmail } from "../../supabase/user_api";
+import { comparePasswords, selectUserByEmail } from "../../Effects/user_api";
 
 export default function Login() {
   const [passwordUsed, setPasswordUsed] = useState("");
