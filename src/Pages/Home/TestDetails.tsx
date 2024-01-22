@@ -23,7 +23,7 @@ const levelsDetails = [
     title: "C1 - Cunoștințe de limbă la nivel de expert",
     description:
       "O persoană ce a terminat nivelul C1 va putea parcurge texte lungi și complicate dintr-un spectru larg de teme. Va putea folosi limba flexibil și efectiv în viața socială și profesională, sau în pregătirea profesională și studiu. Își va putea exprima opinia clar, structurat și detaliat despre cazuri și situații complicate.",
-  }
+  },
 ];
 
 export default function TestDetails() {
@@ -36,9 +36,7 @@ export default function TestDetails() {
         return (
           <p className="paragraph" key={index}>
             <span className="paragraph__title">{item.title}</span>
-            <span className="paragraph__body">
-            {item.description}
-            </span>
+            <span className="paragraph__body">{item.description}</span>
           </p>
         );
       })}

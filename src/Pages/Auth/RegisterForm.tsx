@@ -17,10 +17,18 @@ enum KnowlegdeLevel {
 }
 
 const levelsRadioBtn = [
-  { id:"beginner", value:KnowlegdeLevel.BEGGINER, label:"Începător  (A1-A2)" },
-  { id:"intermediate", value:KnowlegdeLevel.INTERMEDIATE, label:"Intermediar  (B1-B2)" },
-  { id:"advanced", value:KnowlegdeLevel.ADVANCED, label:"Avansat  (C1-C2)" },
-]
+  {
+    id: "beginner",
+    value: KnowlegdeLevel.BEGGINER,
+    label: "Începător  (A1-A2)",
+  },
+  {
+    id: "intermediate",
+    value: KnowlegdeLevel.INTERMEDIATE,
+    label: "Intermediar  (B1-B2)",
+  },
+  { id: "advanced", value: KnowlegdeLevel.ADVANCED, label: "Avansat  (C1-C2)" },
+];
 
 export default function RegisterForm({
   location,
@@ -31,7 +39,7 @@ export default function RegisterForm({
   const [name, setName] = useState("");
   const [passwordUsed, setPasswordUsed] = useState("");
   const [level, setLevel] = useState(KnowlegdeLevel.BEGGINER);
-  const currentLevel = ["A1","B1","C1"][level];
+  const currentLevel = ["A1", "B1", "C1"][level];
   const radioBtnsKey = useId();
 
   const dispatch = useDispatch();
@@ -39,30 +47,46 @@ export default function RegisterForm({
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    dispatch(showLoading());  
-    
-    selectUserByEmail(emailUsed).then((users)=>{
-       const isEmailNotValid = users?.length! > 0;
-       if(isEmailNotValid){
+    dispatch(showLoading());
+
+    selectUserByEmail(emailUsed)
+      .then((users) => {
+        const isEmailNotValid = users?.length! > 0;
+        if (isEmailNotValid) {
+          dispatch(hideLoading());
+          dispatch(
+            showNotification(
+              "Adresa de mail este deja folosită !",
+              NotificationType.WARNING,
+            ),
+          );
+        } else {
+          insertUser(emailUsed, passwordUsed, name, currentLevel)
+            .then(() => {
+              localStorage.setItem("userAccount", emailUsed);
+              dispatch(hideLoading());
+              dispatch(startTransition(`/course-plan/${currentLevel}`));
+            })
+            .catch(() => {
+              dispatch(hideLoading());
+              dispatch(
+                showNotification(
+                  "Eroare de server, încerca-ți mai târziu !",
+                  NotificationType.ERROR,
+                ),
+              );
+            });
+        }
+      })
+      .catch(() => {
         dispatch(hideLoading());
-        dispatch(showNotification("Adresa de mail este deja folosită !", NotificationType.WARNING));
-       }else{
-        insertUser(emailUsed, passwordUsed, name, currentLevel)
-        .then(() => {
-          localStorage.setItem("userAccount", emailUsed);
-          dispatch(hideLoading());
-          dispatch(startTransition(`/course-plan/${currentLevel}`));
-        })
-        .catch(()=>{
-          dispatch(hideLoading());
-          dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
-        })
-       }
-    })
-    .catch(()=>{
-      dispatch(hideLoading());
-      dispatch(showNotification("Eroare de server, încerca-ți mai târziu !", NotificationType.ERROR))
-    })
+        dispatch(
+          showNotification(
+            "Eroare de server, încerca-ți mai târziu !",
+            NotificationType.ERROR,
+          ),
+        );
+      });
   }
 
   return (
@@ -83,20 +107,19 @@ export default function RegisterForm({
                   <span className="span-header-block">
                     ai cont deja ? &ensp;
                     <span className="span-pointer">
-                      <LinkTansition
-                        to="/login"
-                        icon="fas fa-sign-in-alt"
-                      />
+                      <LinkTansition to="/login" icon="fas fa-sign-in-alt" />
                     </span>
                   </span>
                 </div>
 
                 <div className="form__group">
-                  <input type="text" id="name"
+                  <input
+                    type="text"
+                    id="name"
                     className="form__input"
                     placeholder="Nume complet *"
                     value={name}
-                    onChange={(input)=>setName(input.target.value)}
+                    onChange={(input) => setName(input.target.value)}
                     required
                     disabled={disableForm}
                   />
@@ -110,10 +133,12 @@ export default function RegisterForm({
 
                 <div className="form__group">
                   <input
-                    type="email" id="email"
-                    className="form__input" placeholder="Adresă de email *"
+                    type="email"
+                    id="email"
+                    className="form__input"
+                    placeholder="Adresă de email *"
                     value={emailUsed}
-                    onChange={(input)=>setEmailUsed(input.target.value)}
+                    onChange={(input) => setEmailUsed(input.target.value)}
                     required
                     disabled={disableForm}
                   />
@@ -125,23 +150,28 @@ export default function RegisterForm({
                   </label>
                 </div>
 
-                <Password password={passwordUsed} onChange={(str:string)=>setPasswordUsed(str)} isDisabled={disableForm} />
+                <Password
+                  password={passwordUsed}
+                  onChange={(str: string) => setPasswordUsed(str)}
+                  isDisabled={disableForm}
+                />
 
                 <div className="form__group u-margin-bottom-intermediate">
                   <h3 className="form__sub-heading">
                     Care este nivelul tău de germană ?
                   </h3>
-                  {
-                   levelsRadioBtn.map((item, index) => (
-                     <RadioButton key={`${radioBtnsKey}-${index}`}
-                       id={item.id} name="level" 
-                       value={item.value} 
-                       change={()=>setLevel(item.value)} 
-                       label={item.label} 
-                       validate={()=> level === item.value}
-                       disabled={disableForm}
-                       />))
-                  }
+                  {levelsRadioBtn.map((item, index) => (
+                    <RadioButton
+                      key={`${radioBtnsKey}-${index}`}
+                      id={item.id}
+                      name="level"
+                      value={item.value}
+                      change={() => setLevel(item.value)}
+                      label={item.label}
+                      validate={() => level === item.value}
+                      disabled={disableForm}
+                    />
+                  ))}
                 </div>
 
                 <div className="form__group">

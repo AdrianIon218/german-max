@@ -14,13 +14,13 @@ interface ILocProps {
 const MainMenu = () => {
   const [showMenu, setShownMenu] = useState(false);
   const [menuList, setMenuList] = useState<ILocProps[]>(navListNotLogedIn);
-  const {isShown} = useSelector((store:RootState) => store.notification);
+  const { isShown } = useSelector((store: RootState) => store.notification);
   const isNotificationShwon = useRef<boolean>();
   const dispath = useDispatch();
 
-  useEffect(()=>{
-   isNotificationShwon.current = isShown;
-  },[isShown]);
+  useEffect(() => {
+    isNotificationShwon.current = isShown;
+  }, [isShown]);
 
   const triggerMenu = () => {
     if (localStorage.getItem("userAccount")) {
@@ -30,7 +30,7 @@ const MainMenu = () => {
   };
 
   const linkClick = (btn: string) => {
-    if(isNotificationShwon.current){
+    if (isNotificationShwon.current) {
       dispath(hideNotification());
     }
     triggerMenu();
@@ -47,7 +47,9 @@ const MainMenu = () => {
           <Link
             to={item.to}
             className="navigation__link"
-            onClick={() => {linkClick(item.btn)}}
+            onClick={() => {
+              linkClick(item.btn);
+            }}
           >
             <i className={item.icon} /> {item.btn}
           </Link>
@@ -74,9 +76,7 @@ const MainMenu = () => {
         }`}
       />
       <nav className="navigation__menu">
-        <ul className="navigation__list">
-          {navButtons}
-        </ul>
+        <ul className="navigation__list">{navButtons}</ul>
       </nav>
     </div>
   );

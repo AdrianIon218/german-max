@@ -1,7 +1,4 @@
-import {
-  IPropsCardCourse,
-  cardTypes,
-} from "../SpecialComponents/CardCourse";
+import { IPropsCardCourse, cardTypes } from "../SpecialComponents/CardCourse";
 
 export const AvailableCourses: IPropsCardCourse[] = [
   {

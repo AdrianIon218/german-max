@@ -64,7 +64,7 @@
     padding: 27rem $padding-LR-section 23rem;
     margin-top: -17rem;
 
-    &:has(~.section-sign-up){
+    &:has(~ .section-sign-up) {
       padding-bottom: 27rem;
     }
   }
@@ -105,11 +105,11 @@
       transform: scaleY(2);
     }
 
-    @media only screen and (max-width:450px) {
+    @media only screen and (max-width: 450px) {
       transform: scaleY(3);
     }
 
-    @media only screen and (max-width:320px) {
+    @media only screen and (max-width: 320px) {
       display: none;
     }
   }
@@ -127,11 +127,11 @@
     color: $color-blue-7;
     animation: moveInBottomCenter 0.6s ease-in-out 0.2s 1 normal backwards;
 
-    @include respond(phone){
+    @include respond(phone) {
       background-color: rgba($color-cyan-1, 80%);
     }
 
-    span{
+    span {
       display: inline-block;
       width: max-content;
     }

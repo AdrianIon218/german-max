@@ -15,11 +15,11 @@
     flex: 1;
     position: relative;
     transform: scale(0.5);
-    @include mixin_animation(backdrop-in, .4s, ease-in, 0s);
+    @include mixin_animation(backdrop-in, 0.4s, ease-in, 0s);
   }
 
-  .blackdrop__content.blackdrop__content--closing{
-    @include mixin_animation(backdrop-out, .4s, ease-in, 0s);
+  .blackdrop__content.blackdrop__content--closing {
+    @include mixin_animation(backdrop-out, 0.4s, ease-in, 0s);
   }
 
   &__exit {
@@ -51,7 +51,7 @@
     padding-right: 1.9rem;
     overflow: hidden !important;
   }
-  html:has(.blackdrop){
+  html:has(.blackdrop) {
     overflow: hidden !important;
   }
 }

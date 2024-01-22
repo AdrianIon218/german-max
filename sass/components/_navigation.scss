@@ -129,7 +129,7 @@
 
     &__item {
       width: 100%;
-      margin: .7rem 1rem;
+      margin: 0.7rem 1rem;
     }
   }
 
@@ -167,25 +167,26 @@
   }
 }
 @include touchScreenState(false) {
-  body:has(.navigation__background--open){
+  body:has(.navigation__background--open) {
     padding-right: 1.9rem;
     overflow: hidden;
   }
 
-  html:has(.navigation__background--open){
+  html:has(.navigation__background--open) {
     overflow: hidden;
   }
 }
 
-html:not(:has(.navigation__background--open)), body:not(:has(.navigation__background--open)){
-  @include mixin_animation(show-overflow-delay, .1s, ease-in, .15s);
+html:not(:has(.navigation__background--open)),
+body:not(:has(.navigation__background--open)) {
+  @include mixin_animation(show-overflow-delay, 0.1s, ease-in, 0.15s);
 }
 
 @keyframes show-overflow-delay {
-  from{
+  from {
     overflow: hidden;
   }
-  to{
+  to {
     overflow: auto;
   }
 }

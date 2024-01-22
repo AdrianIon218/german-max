@@ -1,4 +1,4 @@
-import TestBox, {ITestBoxProps} from "../../Common/TestBox";
+import TestBox, { ITestBoxProps } from "../../Common/TestBox";
 import tests from "../../data/AvailableTests.json";
 import Blackdrop from "../../Common/Blackdrop";
 import TestDetails from "./TestDetails";
@@ -18,12 +18,19 @@ export default function TestSection() {
 
   return (
     <>
-      {showBackdrop && <Blackdrop onClose={()=>setShowBackdrop(false)}>
-        <TestDetails />
-      </Blackdrop>}
+      {showBackdrop && (
+        <Blackdrop onClose={() => setShowBackdrop(false)}>
+          <TestDetails />
+        </Blackdrop>
+      )}
       <section className="section-tests section-between">
         <div className="section-tests__helper">
-          <div className="btn--cleared helper-btn" onClick={()=>{setShowBackdrop(oldState => !oldState)}}>
+          <div
+            className="btn--cleared helper-btn"
+            onClick={() => {
+              setShowBackdrop((oldState) => !oldState);
+            }}
+          >
             <i className="fas fa-question-circle" />
           </div>
         </div>
@@ -32,9 +39,7 @@ export default function TestSection() {
             Testează-ți cunoștiințele !
           </h2>
         </div>
-        <div className="flex-row--centered">
-          {testElements}
-        </div>
+        <div className="flex-row--centered">{testElements}</div>
       </section>
     </>
   );

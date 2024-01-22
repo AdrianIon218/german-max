@@ -36,8 +36,8 @@ function Notification({ message, type, deleteNotification }: LocProps) {
           type === NotificationType.ERROR
             ? "notification--error"
             : type === NotificationType.SUCCESS
-            ? "notification--success"
-            : type === NotificationType.WARNING && "notification--warning"
+              ? "notification--success"
+              : type === NotificationType.WARNING && "notification--warning"
         }`}
       ref={notificationRef}
     >

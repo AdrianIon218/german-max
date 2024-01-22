@@ -18,14 +18,19 @@ export interface IPropsCardCourse {
   estimationWeeks: number;
 }
 
-interface IProps extends IPropsCardCourse{
-  isLoading?:boolean
+interface IProps extends IPropsCardCourse {
+  isLoading?: boolean;
 }
 
 export default function CardCourse(props: IProps) {
-  if(props.isLoading) return (<div className="card">
-    <div className={`card__side card__loading card__loading--${props.typeCard} `}></div>
-  </div>);
+  if (props.isLoading)
+    return (
+      <div className="card">
+        <div
+          className={`card__side card__loading card__loading--${props.typeCard} `}
+        ></div>
+      </div>
+    );
 
   return (
     <div className="card flex-element">

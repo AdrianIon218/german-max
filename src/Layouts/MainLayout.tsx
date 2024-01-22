@@ -14,23 +14,37 @@ import LinkTansition from "../Common/LinkTransition";
 import { stopTransition } from "../SliceReducers/TransitionSlice";
 
 export default function MainLayout() {
-  const {isShown:isNotificationShwon, message:notificationMessage, type:notificationType} = useSelector((store:RootState) => store.notification);
-  const {isLoading} = useSelector((store:RootState) => store.loading);
-  const pageTransition = useSelector((store:RootState) => store.pageTransition);
+  const {
+    isShown: isNotificationShwon,
+    message: notificationMessage,
+    type: notificationType,
+  } = useSelector((store: RootState) => store.notification);
+  const { isLoading } = useSelector((store: RootState) => store.loading);
+  const pageTransition = useSelector(
+    (store: RootState) => store.pageTransition,
+  );
   const dispatch = useDispatch();
-  
+
   return (
     <TransitionContext>
       <ScrollToTop>
-        {isNotificationShwon && (<Notification message={notificationMessage} type={notificationType}
-          deleteNotification={() => dispatch(hideNotification())}/>)
-        }
-        {isLoading && (<LoadingSpinner />)}
+        {isNotificationShwon && (
+          <Notification
+            message={notificationMessage}
+            type={notificationType}
+            deleteNotification={() => dispatch(hideNotification())}
+          />
+        )}
+        {isLoading && <LoadingSpinner />}
         {pageTransition.isTransitioning && (
-        <LinkTansition to={pageTransition.pageTarget} transitNow={true} onClose={()=>dispatch(stopTransition())}>
-          {" "}
-        </LinkTansition>
-      )}
+          <LinkTansition
+            to={pageTransition.pageTarget}
+            transitNow={true}
+            onClose={() => dispatch(stopTransition())}
+          >
+            {" "}
+          </LinkTansition>
+        )}
         <MainMenu />
         <Suspense fallback={<LoadingLoader />}>
           <Outlet />

@@ -85,12 +85,12 @@
     }
   }
 
-  &__item:has(span.link-disabled):hover{
+  &__item:has(span.link-disabled):hover {
     transform: translateY(0px);
   }
 
-  span.link-disabled{
-    color:  $color-blue-2;
+  span.link-disabled {
+    color: $color-blue-2;
     cursor: default;
   }
   &__coryright {

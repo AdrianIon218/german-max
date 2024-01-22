@@ -74,9 +74,9 @@
 
 @keyframes backdrop-in {
   from {
-    transform: translateY(50vh) scale(.5);
+    transform: translateY(50vh) scale(0.5);
   }
-  to{
+  to {
     transform: scale(1);
   }
 }
@@ -85,33 +85,48 @@
   from {
     transform: scale(1);
   }
-  to{
+  to {
     opacity: 0%;
     transform: scale(1) translateY(30vh);
   }
 }
 
 @keyframes skeleton-card {
-  0%{
-    opacity: .6;
-    background-image: linear-gradient(to right,
-      $color-loading-white 0%, $color-loading-white 20%,
-      var(--test) 50%, var(--test));
+  0% {
+    opacity: 0.6;
+    background-image: linear-gradient(
+      to right,
+      $color-loading-white 0%,
+      $color-loading-white 20%,
+      var(--test) 50%,
+      var(--test)
+    );
   }
-  40%{
-    opacity: .6;
-    background-image: linear-gradient(to right,
-    var(--loading-skeleton) 0%, var(--loading-skeleton) 40%,
-     $color-loading-white 70%);
+  40% {
+    opacity: 0.6;
+    background-image: linear-gradient(
+      to right,
+      var(--loading-skeleton) 0%,
+      var(--loading-skeleton) 40%,
+      $color-loading-white 70%
+    );
   }
-  80%{
-    opacity: .6;
-    background-image: linear-gradient(to right,
-      $color-loading-white 0%, var(--loading-skeleton) 40%,
-      $color-loading-white 80%);
+
+  80% {
+    opacity: 0.6;
+    background-image: linear-gradient(
+      to right,
+      $color-loading-white 0%,
+      var(--loading-skeleton) 40%,
+      $color-loading-white 80%
+    );
   }
-  100%{
-    opacity: .6;
-    background-image: linear-gradient(to right, $color-loading-white, var(--loading-skeleton));
+  100% {
+    opacity: 0.6;
+    background-image: linear-gradient(
+      to right,
+      $color-loading-white,
+      var(--loading-skeleton)
+    );
   }
 }

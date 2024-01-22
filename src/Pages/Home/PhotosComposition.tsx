@@ -1,7 +1,5 @@
 import { useId } from "react";
-import CompositionPhoto, {
-  ICompositionPhotoProps,
-} from "./CompositionPhoto";
+import CompositionPhoto, { ICompositionPhotoProps } from "./CompositionPhoto";
 
 interface IProps {
   photos: ICompositionPhotoProps[];

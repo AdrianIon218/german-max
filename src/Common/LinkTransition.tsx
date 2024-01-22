@@ -11,18 +11,18 @@ interface IProps {
   children?: any;
   className?: string;
   transitNow?: boolean;
-  onClose?:()=>void
+  onClose?: () => void;
 }
 
 function LinkTansition(props: IProps) {
   const context = useTransition();
-  const {isShown} = useSelector((store:RootState) => store.notification);
+  const { isShown } = useSelector((store: RootState) => store.notification);
   const isNotificationShwon = useRef<boolean>();
   const dispath = useDispatch();
 
-  useEffect(()=>{
-   isNotificationShwon.current = isShown;
-  },[isShown]);
+  useEffect(() => {
+    isNotificationShwon.current = isShown;
+  }, [isShown]);
 
   const navigate = useNavigate();
   const transitionPlay = () => {
@@ -30,7 +30,7 @@ function LinkTansition(props: IProps) {
 
     setTimeout(() => {
       context!.setTransition(false);
-      if(isNotificationShwon.current){
+      if (isNotificationShwon.current) {
         dispath(hideNotification());
       }
     }, 500);

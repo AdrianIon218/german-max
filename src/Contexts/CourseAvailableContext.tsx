@@ -12,7 +12,7 @@ type CourseResponse = {
 
 export const CourseAvailableCtx = React.createContext<IPropsCardCourse[]>([]);
 
-function CourseAvailableContext({ children }: {children:any}) {
+function CourseAvailableContext({ children }: { children: any }) {
   const [availableCourse, setAvailableCourse] = useState(AvailableCourses);
   useEffect(() => {
     axios.get("http://localhost:5000/courses_available").then((response) => {
@@ -49,7 +49,7 @@ function CourseAvailableContext({ children }: {children:any}) {
   );
 }
 
-export function useCourseAvailable(){
+export function useCourseAvailable() {
   return useContext(CourseAvailableCtx);
 }
 

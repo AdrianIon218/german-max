@@ -1,4 +1,8 @@
-import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import { lazy } from "react";
 
@@ -15,58 +19,60 @@ const ResetPass = lazy(() => import("./Pages/Auth/ResetPass"));
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element:<MainLayout />,
-    errorElement:<Navigate to="/page-not-found" replace />,
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <Navigate to="/page-not-found" replace />,
     children: [
       {
-        path:"/",
+        path: "/",
         element: <MainPage />,
-        loader: mainPageLoader
+        loader: mainPageLoader,
       },
       {
-        path:'page-not-found',
-        element:<NoPage />
+        path: "page-not-found",
+        element: <NoPage />,
       },
       {
-        path:"login",
+        path: "login",
         element: <Login />,
       },
       {
-        path:"signup",
-        element: <RegisterForm location="register" />
+        path: "signup",
+        element: <RegisterForm location="register" />,
       },
       {
-        path:"suport",
+        path: "suport",
         element: <Support />,
         loader: supportLoader,
-        action: supportAction
-      },
-      { 
-        path:"courses",
-        element: <CoursesPage location="own-page" />
+        action: supportAction,
       },
       {
-        path:"password_reset",
-        children:[
+        path: "courses",
+        element: <CoursesPage location="own-page" />,
+      },
+      {
+        path: "password_reset",
+        children: [
           {
-            index:true,
-            element:<ResetPass />,
+            index: true,
+            element: <ResetPass />,
           },
           {
-            path:"verify_password",
-            element:<p>Verificare cod de resetare</p>
+            path: "verify_password",
+            element: <p>Verificare cod de resetare</p>,
           },
           {
-            path:"new_password",
-            element:<p>Formular setare new password</p>
-          }
-        ]
-      }]
-  }]);
+            path: "new_password",
+            element: <p>Formular setare new password</p>,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
 export default App;

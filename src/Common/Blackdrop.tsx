@@ -2,10 +2,10 @@ import { useState } from "react";
 
 interface IBlackdropProps {
   children: any;
-  onClose: ()=>void
+  onClose: () => void;
 }
 
-export default function Blackdrop({children, onClose}: IBlackdropProps) {
+export default function Blackdrop({ children, onClose }: IBlackdropProps) {
   const [isClosing, setClosing] = useState(false);
 
   function exitBackdrop() {
@@ -21,8 +21,12 @@ export default function Blackdrop({children, onClose}: IBlackdropProps) {
     event.stopPropagation();
   }
 
-  return <section className="blackdrop" onClick={exitBackdrop}>
-      <div className={`blackdrop__content ${isClosing?"blackdrop__content--closing":""}`} onClick={breakPropagation}>
+  return (
+    <section className="blackdrop" onClick={exitBackdrop}>
+      <div
+        className={`blackdrop__content ${isClosing ? "blackdrop__content--closing" : ""}`}
+        onClick={breakPropagation}
+      >
         <div className="blackdrop__exit">
           <div onClick={exitBackdrop} className="blackdrop__exit__btn">
             &times;
@@ -30,5 +34,6 @@ export default function Blackdrop({children, onClose}: IBlackdropProps) {
         </div>
         {children}
       </div>
-    </section>;
+    </section>
+  );
 }

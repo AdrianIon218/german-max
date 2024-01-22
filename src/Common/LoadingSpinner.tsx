@@ -1,5 +1,3 @@
-
-
 function LoadingSpinner() {
   return (
     <div className="position-over">
@@ -10,8 +8,7 @@ function LoadingSpinner() {
         <div />
       </div>
     </div>
-    
-  )
+  );
 }
 
 export default LoadingSpinner;

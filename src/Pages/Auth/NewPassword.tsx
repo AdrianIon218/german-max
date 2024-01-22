@@ -4,7 +4,7 @@ import axios from "axios";
 
 function NewPassword() {
   const navigate = useNavigate();
-  
+
   const [isPassSaved, setPassSaved] = useState(false);
   const passRef = useRef<HTMLInputElement>(null);
   const email = sessionStorage.getItem("emailToReset");
@@ -71,62 +71,62 @@ function NewPassword() {
   };
 
   return (
-      <section className="section-gradient section-header u_padding_down--big">
-        <div className="flex-row--centered">
-          <div className="box-mountain-bg">
-            <div className="box-mountain-bg__form">
-              <form className="forn">
-                <div className="u-center-text u-margin-bottom-medium">
-                  <h2
-                    className="heading-secondary"
-                    style={{ textTransform: "none" }}
-                  >
-                    {isPassSaved
-                      ? "Parola a fost salvată!"
-                      : "Setează o parolă nouă!"}
-                  </h2>
-                </div>
-                <div className="form__group" hidden={isPassSaved}>
-                  <input
-                    type="password"
-                    minLength={6}
-                    maxLength={50}
-                    className="form__input"
-                    placeholder="Parolă de minim 6 caractere *"
-                    id="password"
-                    ref={passRef}
-                    required
-                  />
-                  <label
-                    htmlFor="password"
-                    className="form__label form__label__required"
-                  >
-                    Parolă
+    <section className="section-gradient section-header u_padding_down--big">
+      <div className="flex-row--centered">
+        <div className="box-mountain-bg">
+          <div className="box-mountain-bg__form">
+            <form className="forn">
+              <div className="u-center-text u-margin-bottom-medium">
+                <h2
+                  className="heading-secondary"
+                  style={{ textTransform: "none" }}
+                >
+                  {isPassSaved
+                    ? "Parola a fost salvată!"
+                    : "Setează o parolă nouă!"}
+                </h2>
+              </div>
+              <div className="form__group" hidden={isPassSaved}>
+                <input
+                  type="password"
+                  minLength={6}
+                  maxLength={50}
+                  className="form__input"
+                  placeholder="Parolă de minim 6 caractere *"
+                  id="password"
+                  ref={passRef}
+                  required
+                />
+                <label
+                  htmlFor="password"
+                  className="form__label form__label__required"
+                >
+                  Parolă
+                </label>
+                <div className="form__group form__group__checkbox">
+                  <label htmlFor="pass_toggle" className="form__label">
+                    Arată parola
                   </label>
-                  <div className="form__group form__group__checkbox">
-                    <label htmlFor="pass_toggle" className="form__label">
-                      Arată parola
-                    </label>
-                    <input
-                      type="checkbox"
-                      className="form__checkbox"
-                      name="pass_toggle"
-                      id="pass_toggle"
-                      onClick={togglePassVisibility}
-                    />
-                  </div>
+                  <input
+                    type="checkbox"
+                    className="form__checkbox"
+                    name="pass_toggle"
+                    id="pass_toggle"
+                    onClick={togglePassVisibility}
+                  />
                 </div>
-                <div className="form__group">
-                  <button className="btn btn--white" onClick={onSubmit}>
-                    {isPassSaved ? "Înapoi la autenficare" : "Salvează parola "}
-                    {!isPassSaved && <i className="fa fa-save" />}
-                  </button>
-                </div>
-              </form>
-            </div>
+              </div>
+              <div className="form__group">
+                <button className="btn btn--white" onClick={onSubmit}>
+                  {isPassSaved ? "Înapoi la autenficare" : "Salvează parola "}
+                  {!isPassSaved && <i className="fa fa-save" />}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
 

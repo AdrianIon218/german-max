@@ -91,15 +91,15 @@ h1 {
     display: block;
     font-size: 1.4rem;
     font-weight: 800;
-    color:$color-blue-7;
+    color: $color-blue-7;
     text-align: left;
 
-    @include respond(phone){
+    @include respond(phone) {
       text-align: center;
     }
   }
 
-  &__body{
+  &__body {
     text-indent: 1rem;
     display: block;
     text-align: justify;

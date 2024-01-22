@@ -1,13 +1,8 @@
-
 export default function Header() {
   return (
     <div className="header-container">
       <div className="logo_box">
-        <img
-          src="GermanMax.png"
-          alt="GermanMax"
-          className="logo_box__img"
-        />
+        <img src="GermanMax.png" alt="GermanMax" className="logo_box__img" />
       </div>
       <header className="header section-header">
         <div className="text-box">

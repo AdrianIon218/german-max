@@ -90,63 +90,61 @@ function ResetPassCode() {
   };
 
   return (
-      <section className="section-gradient section-header u_padding_down--big">
-        <div className="flex-row--centered">
-          <div className="box-mountain-bg">
-            <div className="box-mountain-bg__form">
-              <form className="forn">
-                <div className="u-center-text u-margin-bottom-medium">
-                  <h2
-                    className="heading-secondary"
-                    style={{ textTransform: "none" }}
-                  >
-                    {isCodeExpired
-                      ? `Codul trimis la ${emailToReset} a expirat!`
-                      : `Introduceți codul trimis la adresa ${emailToReset}`}
-                  </h2>
-                  <p
-                    style={{ fontSize: "1rem", fontWeight: 800 }}
-                    hidden={isCodeExpired}
-                  >
-                    Codul expiră în &nbsp;
-                    {/*
+    <section className="section-gradient section-header u_padding_down--big">
+      <div className="flex-row--centered">
+        <div className="box-mountain-bg">
+          <div className="box-mountain-bg__form">
+            <form className="forn">
+              <div className="u-center-text u-margin-bottom-medium">
+                <h2
+                  className="heading-secondary"
+                  style={{ textTransform: "none" }}
+                >
+                  {isCodeExpired
+                    ? `Codul trimis la ${emailToReset} a expirat!`
+                    : `Introduceți codul trimis la adresa ${emailToReset}`}
+                </h2>
+                <p
+                  style={{ fontSize: "1rem", fontWeight: 800 }}
+                  hidden={isCodeExpired}
+                >
+                  Codul expiră în &nbsp;
+                  {/*
                     <CountDownTime
                       time={expireCodeTime}
                       codeExpire={() => setCodeExpire(true)}
                     />
                     */}
-                  </p>
-                </div>
+                </p>
+              </div>
 
-                <div
-                  className="form__group u-margin-bottom-intermediate"
-                  hidden={isCodeExpired}
-                >
-                  <input
-                    type="password"
-                    className="form__input u-center-text"
-                    placeholder="Cod de resetare"
-                    id="password"
-                    name="password"
-                    minLength={6}
-                    maxLength={6}
-                    required
-                    ref={codeRef}
-                  />
-                </div>
+              <div
+                className="form__group u-margin-bottom-intermediate"
+                hidden={isCodeExpired}
+              >
+                <input
+                  type="password"
+                  className="form__input u-center-text"
+                  placeholder="Cod de resetare"
+                  id="password"
+                  name="password"
+                  minLength={6}
+                  maxLength={6}
+                  required
+                  ref={codeRef}
+                />
+              </div>
 
-                <div className="form__group">
-                  <button className="btn btn--white" onClick={onSubmit}>
-                    {isCodeExpired
-                      ? "Înapoi la autentificare"
-                      : "Verifică codul"}
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="form__group">
+                <button className="btn btn--white" onClick={onSubmit}>
+                  {isCodeExpired ? "Înapoi la autentificare" : "Verifică codul"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
 
